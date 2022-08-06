@@ -1,2 +1,2 @@
-# PS
-알고리즘 문제풀이
+# Problem Solving
+[![Solved.ac Profile](http://mazassumnida.wtf/api/v2/generate_badge?boj=haguk0503)](https://solved.ac/haguk0503/)  
