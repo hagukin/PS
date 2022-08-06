@@ -1,0 +1,5 @@
+https://www.acmicpc.net/category/detail/2123
+
+이분탐색 (파라메트릭 서치)
+17951
+
