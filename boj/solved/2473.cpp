@@ -1,10 +1,57 @@
 /*
+방법1: O(N^2)
+수 하나 잡은 상태에서 투포인터로 그 수 * -1을 찾는 방식
+수 하나 잡는데 총 N개니까 O(N),
+투 포인터로 길이 N인 배열에서 값 X가 되는 두 수의 합을 찾는 데는 O(N)이 소요되므로
+총 O(N^2) 소요.
+*/
+#include <iostream>
+#include <algorithm>
+#include <math.h>
+using namespace std;
+long long arr[5000];
+long long ans[3];
+
+int main() {
+    ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+    int num;
+    long long result = 3000000001; // 용액 각각 10억이 최대
+    cin>>num;
+    for(int i=0;i<num;i++)
+        cin>>arr[i];
+    sort(arr,arr+num);
+    for(int k=0;k<num-2;k++)
+    {
+        int l=k+1,r=num-1;
+        while(l<r)
+        {
+            long long val = arr[k]+arr[l]+arr[r];
+            if(abs(val) < result)
+            {
+                result = abs(val);
+                ans[0] = arr[k];
+                ans[1] = arr[l];
+                ans[2] = arr[r];
+            }
+            if(val<0) l++;
+            else r--;
+        }
+    }
+    for(int i=0;i<3;i++)
+        cout << ans[i]<<" ";
+    return 0;
+}
+
+/*
+방법2(내 풀이): O(N^2 * logN)
+두 수의 합 구해주면서 그 수 * -1을 찾는 이분탐색
 5
 -2 6 -97 -6 98
 일단 정렬
 -97 -6 -2 6 98
 O = 두 수를 더한 합의 모든 경우의 수(5000+4999+...+1 = 약 1250만) * 그 경우의 수와 가장 가까운값 찾기(약 log2 5000 * 7)
 */
+/*
 #include <iostream>
 #include <algorithm>
 #include <climits>
@@ -72,3 +119,4 @@ int main()
     cout << ret[0] << " " << ret[1] << " " << ret[2] << '\n';
     return 0;
 }
+*/
