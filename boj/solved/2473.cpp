@@ -14,7 +14,7 @@ int N;
 lint retSum = LONG_MAX; // 세 수의 합
 lint ret[3]; // 세 수
 lint arr[5001];
-int ds[9] = {-3,-2,-1,0,1,2,3};
+int ds[7] = {-3,-2,-1,0,1,2,3};
 
 int getClosest(lint x, int i, int j)
 {
