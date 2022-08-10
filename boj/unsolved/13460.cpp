@@ -1,71 +1,3 @@
-/*
-반례들
-공통적으로 답으로부터 1씩 오차가 난다는 특징이 있음.
-
-7 10
-##########
-#..###..##
-#....#####
-###O..####
-##B..##..#
-##.#R#..##
-##########
-
-answer : 3
-난 4
-
-
-9 6
-######
-##.#.#
-#.#.##
-#..#.#
-#B..##
-#R#.##
-#.##.#
-#O.###
-######
-
-answer : 2
-난 1
-
-6 9
-#########
-#..#...R#
-#..##.#.#
-#.###OB.#
-####.#..#
-#########
-
-답 3
-난 4
-
-
-8 6
-######
-#..#.#
-######
-#.##.#
-#.OB.#
-##.#R#
-###..#
-######
-답 3
-난 4
-
-
-6 5
-#####
-###R#
-##..#
-#OB.#
-#.#.#
-#####
-답 3
-난 4
-*/
-
-
 #include <iostream>
 #include <string>
 #include <climits>
@@ -126,8 +58,8 @@ void move(int dx, int dy, int& rx, int& ry, int& bx, int& by, bool& crGoal, bool
         if (dy==1)
         {
             // 0 1
-            // 위쪽 먼저
-            if (ry <= by)
+            // 아랫쪽 먼저
+            if (ry >= by)
             {
                 moveMarble(dx, dy, rx, ry, bx, by, true, crGoal, cbGoal);
                 moveMarble(dx, dy, bx, by, rx, ry, false, crGoal, cbGoal);
@@ -141,8 +73,8 @@ void move(int dx, int dy, int& rx, int& ry, int& bx, int& by, bool& crGoal, bool
         else
         {
             // 0 -1
-            // 아랫쪽 먼저
-            if (ry >= by)
+            // 윗쪽 먼저
+            if (ry <= by)
             {
                 moveMarble(dx, dy, rx, ry, bx, by, true, crGoal, cbGoal);
                 moveMarble(dx, dy, bx, by, rx, ry, false, crGoal, cbGoal);
