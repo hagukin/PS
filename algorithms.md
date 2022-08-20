@@ -209,3 +209,6 @@ int main() {
 	return 0;
 }
 ```
+# 이분탐색  
+## Lower_bound vs Upper_bound  
+![image](https://user-images.githubusercontent.com/63915665/185752220-2f6d3103-82a4-41d1-99c5-b575168554ff.png)  
