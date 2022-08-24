@@ -6,3 +6,6 @@ https://www.acmicpc.net/blog/view/109
 
 LIS(Longest increasing subsequence)  
 https://rebro.kr/33  
+
+Segment Tree  
+https://book.acmicpc.net/ds/segment-tree  
