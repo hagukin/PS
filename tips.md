@@ -11,3 +11,7 @@ std::sort(s.begin(), s.end(), [](int a, int b) {
 int value = 1;
 vector<vector<int>> matrix(M, vector<int>(N, value));
 ```
+* 2진수 입력  
+```c++
+0b00111;
+```
