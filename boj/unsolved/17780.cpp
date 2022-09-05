@@ -7,7 +7,7 @@ struct Piece
 {
     int _y, _x;
     int dydx; // rlud 1234
-    list<int> pStack; // 이 말이 속해있는 stack. l->r: 맨 위에서 맨 아래로
+    list<int> pStack; // 이 말이 속해있는 stack. l->r: 맨 아래에서 맨 위로
 };
 
 int N, K, ret=-1;
@@ -20,19 +20,19 @@ int reverseDir[5] = {0,2,1,4,3};
 bool canMove(int idx)
 {
     // idx번 말이 가장 아래에 있는가?
-    return idx == pieces[idx].pStack.back();
+    return idx == pieces[idx].pStack.front();
 }
 
 int getY(int idx)
 {
     if (canMove(idx)) return pieces[idx]._y;
-    else return getY(pieces[idx].pStack.back());
+    else return getY(pieces[idx].pStack.front());
 }
 
 int getX(int idx)
 {
     if (canMove(idx)) return pieces[idx]._x;
-    else return getX(pieces[idx].pStack.back());
+    else return getX(pieces[idx].pStack.front());
 }
 
 void setY(int idx, int val)
@@ -69,14 +69,14 @@ void moveAndStack(int idx, int cy, int cx, int dy, int dx)
     // 기존 위치에서 정보 삭제
     gridPieces[pieces[idx]._y][pieces[idx]._x] = 0;
     // 동기화
-    for (int nidx : pieces[idx].pStack)
+    for (int nidx : pieces[tp].pStack)
     {
         pieces[nidx]._y = ny;
         pieces[nidx]._x = nx;
         pieces[nidx].pStack = pieces[tp].pStack;
     }
     // 새 위치 정보 입력
-    gridPieces[ny][nx] = pieces[idx].pStack.back();
+    gridPieces[ny][nx] = pieces[idx].pStack.front();
     return;
 }
 
@@ -118,11 +118,6 @@ bool processMove(int idx)
         default:
             break;
     }
-    cout << idx << getX(idx) << getY(idx) << endl;
-    for (int i : pieces[idx].pStack)
-    {
-        cout << i << "S" << endl;
-    }
     if (pieces[idx].pStack.size() >= 4) return true;
     return false;
 }
@@ -130,7 +125,7 @@ bool processMove(int idx)
 bool processTurn()
 {
     // return: 게임이 이번 턴 동안 끝났는가?
-    for (int ci=0;ci<K;ci++)
+    for (int ci=1;ci<=K;ci++)
     {
         if (processMove(ci)) return true;
     }
@@ -161,7 +156,7 @@ int main()
         }
     }
     int ty, tx, tDir;
-    for (int i=0;i<K;i++)
+    for (int i=1;i<=K;i++)
     {
         cin >> ty >> tx >> tDir;
         list<int> nl;
@@ -180,6 +175,17 @@ int main()
             break;
         }
     }
+    
+    for (int idx=1;idx<=K;idx++)
+    {
+        cout << idx << getX(idx) << getY(idx) << endl;
+        for (int i : pieces[idx].pStack)
+        {
+            cout << i << "S";
+        }
+        cout << "------" << endl;
+    }
+    
     cout << ret << '\n';
     return 0;
 }
