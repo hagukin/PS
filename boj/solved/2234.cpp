@@ -3,14 +3,15 @@
 #include <set>
 using namespace std;
 constexpr int MAXN = 53;
+constexpr int MAXR = 2501;
 int M, N;
 int tiles[MAXN][MAXN]; // [i][j] = k: 해당 타일이 k번방에 속함. 맵은 1,1부터 시작.
 int walls[MAXN][MAXN]; // [i][j] = k: k의 비트에 따라 어디어디에 벽이 있는지를 저장.
 bool visited[MAXN][MAXN]; // NOTE: tiles -1을 nonvisited로 만들면 메모리 줄이기 가능할지도
 int doorDir[4] = {2,8,1,4}; // udlr
 int moveDir[4][2] = {{0,-1},{0,1},{-1,0},{1,0}}; // dxdy
-int roomSizes[2501];
-set<int> adjRoom[2501]; // adj[i]: i번방과 adjacent한 방들의 집합
+int roomSizes[MAXR];
+set<int> adjRoom[MAXR]; // adj[i]: i번방과 adjacent한 방들의 집합
 
 // R = 2500
 // 방의 갯수: dfs O(R^2) 1250만
@@ -86,44 +87,34 @@ int main()
             }
         }
     }
-    
-    // debug
+    // 3번
     for (int i=1;i<=M;i++)
     {
         for (int j=1;j<=N;j++)
         {
-            cout << tiles[i][j];
+            for (int d=0;d<4;d++)
+            {
+                if (hasWallAtDir(i,j,doorDir[d]))
+                {
+                    int nx = j + moveDir[d][0];
+                    int ny = i + moveDir[d][1];
+                    if (nx < 1 || nx > N || ny < 1 || ny > M) continue;
+                    if (tiles[ny][nx] == tiles[i][j]) continue; // 같은 방끼리는 인접할 수 없다
+                    adjRoom[tiles[ny][nx]].insert(tiles[i][j]);
+                    adjRoom[tiles[i][j]].insert(tiles[ny][nx]);
+                }
+            }
         }
-        cout << endl;
     }
-    
-    // 3번
-    // for (int i=1;i<=M;i++)
-    // {
-    //     for (int j=1;j<=N;j++)
-    //     {
-    //         for (int d=0;d<4;d++)
-    //         {
-    //             if (hasWallAtDir(i,j,doorDir[d]))
-    //             {
-    //                 int nx = j + moveDir[d][0];
-    //                 int ny = i + moveDir[d][1];
-    //                 adjRoom[tiles[ny][nx]].insert(tiles[i][j]);
-    //                 adjRoom[tiles[i][j]].insert(tiles[ny][nx]);
-    //             }
-    //         }
-    //     }
-    // }
-    // int ret3 = -1;
-    // for (int r1=0;r1<2500;r1++)
-    // {
-    //     for (int r2 : adjRoom[r1])
-    //     {
-    //         ret3 = max(ret3, roomSizes[r1] + roomSizes[r2]);
-    //     }
-    // }
-    
-    // cout << cnt << maxSize << ret3 << '\n';
+    int ret3 = -1;
+    for (int r1=0;r1<cnt;r1++)
+    {
+        for (int r2 : adjRoom[r1])
+        {
+            ret3 = max(ret3, roomSizes[r1] + roomSizes[r2]);
+        }
+    }
+    cout << cnt << '\n' << maxSize  << '\n' << ret3 << '\n';
     
     return 0;
 }
