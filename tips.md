@@ -15,3 +15,17 @@ vector<vector<int>> matrix(M, vector<int>(N, value));
 ```c++
 0b00111;
 ```
+* Python의 a == b == c와 c++의 a == b == c를 혼동하지 말것!
+* 파이썬에서는 세 값이 모두 같은지를 비교해주는 반면 c++에서는 (a == b) == c 순으로 처리한다.
+```c++
+// c++
+(2 == 2 == 2); // false
+//주의:
+(1 == 1 == 1); // true
+// (1 == 1)이 true인데 true == 1은 1 == 1로 typecast되어 true 반환.
+```
+```python
+# Python3
+(2 == 2 == 2) // True
+(1 == 1 == 1) // True
+```
