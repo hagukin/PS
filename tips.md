@@ -29,3 +29,6 @@ vector<vector<int>> matrix(M, vector<int>(N, value));
 (2 == 2 == 2) // True
 (1 == 1 == 1) // True
 ```
+
+
+[그 외 참고하면 좋은 팁들](https://kswims.tistory.com/137)
