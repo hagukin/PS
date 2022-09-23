@@ -209,6 +209,47 @@ int main() {
 	return 0;
 }
 ```
+
+## 선형대수
+### 행렬의 N 거듭제곱  
+A^8을 구하기 위해서는 A * A를 8번 계산하는 O(N) 풀이도 있지만,  
+A^10 = (A^4)^2라는 성질을 이용해 더 빠르게 구할 수 있다.  
+A^4는 (A^2)^2 이므로, 우리는 log2(8) = 3회의 행렬곱 연산으로 구할 수 있다.  
+MxM 행렬의 행렬곱 연산 1회에는 O(M^3)이 소요되므로(구현해보면 알 수 있다), 총 시간복잡도는 O(M^3 * logN)이다.  
+N이 짝수가 아닌 경우 A^(N-1)을 먼저 구한 후 A를 마지막에 한번 더 곱해주면 된다.  
+
+이를 코드로 구현할 때 그냥 O(log2)에 구현할 수도 있지만 비트연산을 사용해 더 최적화할 수 있다.  
+[참고](https://greeksharifa.github.io/algorithm%20&%20data%20structure/2018/07/04/algorithm-matrix-power/)  
+
+```c++
+TODO
+```
+
+### 행렬의 거듭제곱들의 합 (A^1 + ... A^N)  
+S(N) = (A^1 + ... + A^N)이라 하자.  
+
+N이 짝수일 때:  
+S(N)  
+= (A^1 + ... A^(N/2)) * A^(N/2) + (A^1 + ... A^(N/2))  
+= (A^1 + ... A^(N/2)) * (A^(N/2) + I)  
+= S(N/2) * (A^(N/2) + I)  
+이를 재귀적으로 하면 log2로 단축할 수 있다.  
+
+N이 홀수일 때:  
+S(N)  
+= S(N-1) + A^N  
+단 S(0)은 0이다.  
+
+A^K를 구할 때는 행렬의 N 거듭제곱 알고리즘을 사용해 O(M^3 * logN)에 구한다.  
+행렬거듭제곱을 logN번 가량 해야 하므로 총 시간복잡도는 대략 O(M^3 * (logN)^2)이다.  
+
+[참고1](https://memoacmicpc.tistory.com/entry/%EB%B0%B1%EC%A4%80-13246%EB%B2%88-%ED%96%89%EB%A0%AC-%EC%A0%9C%EA%B3%B1%EC%9D%98-%ED%95%A9)  
+[참고2](https://blog.naver.com/PostView.naver?blogId=jinhan814&logNo=222383870866&categoryNo=0&parentCategoryNo=0&viewDate=&currentPage=1&postListTopCurrentPage=1&from=postView)  
+
+```c++
+TODO
+```
+
 # 이분탐색  
 ## Lower_bound vs Upper_bound  
 ![image](https://user-images.githubusercontent.com/63915665/185752220-2f6d3103-82a4-41d1-99c5-b575168554ff.png)  
