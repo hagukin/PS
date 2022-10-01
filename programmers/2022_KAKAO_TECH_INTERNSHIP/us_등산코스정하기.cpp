@@ -107,6 +107,8 @@ vector<int> solution(int n, vector<vector<int>> paths, vector<int> gates, vector
     {
         Path np = {paths[i][0], paths[i][1], paths[i][2]};
         newPaths[paths[i][0]].push_back(np);
+        np = {paths[i][1], paths[i][0], paths[i][2]};
+        newPaths[paths[i][1]].push_back(np);
     }
     
     // 2
@@ -142,11 +144,19 @@ vector<int> solution(int n, vector<vector<int>> paths, vector<int> gates, vector
         while (!pq.empty())
         {
             Path currP = pq.top();
-            cout << currP.start << currP.goal << currP.dist << endl;
             pq.pop();
+            if (visited[currP.goal]) continue;
+            cout << currP.start << currP.goal << currP.dist << endl;
             visited[currP.goal] = true;
             
             intensity[currP.goal] = max(currP.dist, intensity[currP.start]);
+
+            for (int j=0;j<newPaths[currP.goal].size();j++)
+            {
+                Path cPath = newPaths[currP.goal][j];
+                if (visited[cPath.goal]) continue; // 없애도되나?
+                pq.push(cPath);
+            }
             
             if (isSummit[currP.goal])
             {
@@ -155,14 +165,6 @@ vector<int> solution(int n, vector<vector<int>> paths, vector<int> gates, vector
                     cRet[0] = currP.goal;
                     cRet[1] = intensity[currP.goal];
                 }
-                continue; // 산 정상에서는 더 탐색을 진행하지 않음
-            }
-            
-            for (int j=0;j<newPaths[currP.goal].size();j++)
-            {
-                Path cPath = newPaths[currP.goal][j];
-                if (visited[cPath.goal]) continue;
-                pq.push(cPath);
             }
         }
         answerCandidates[s] = cRet;
