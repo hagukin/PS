@@ -29,6 +29,19 @@ vector<vector<int>> matrix(M, vector<int>(N, value));
 (2 == 2 == 2) // True
 (1 == 1 == 1) // True
 ```
-
+* for loop bracket 생략하면서 여러 줄 쓰는법  
+```c++
+for (...)
+    do_this(), do_that(), do_this_too();
+```  
+* auto& 사용  
+```c++
+for (auto& x : arr)
+    cout << x << endl;
+```  
+* vector 정해진 값들로 초기화  
+```c++
+vector<int> v{1,2,3,4};
+```  
 
 [그 외 참고하면 좋은 팁들](https://kswims.tistory.com/137)
