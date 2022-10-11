@@ -1,5 +1,8 @@
 // O(N)으로 풀이했으나 시간제한에 걸린다
 // 답 자체는 구해지나 제한시간에 맞추려면 행렬곱을 이용해야 하는듯 해 보인다
+// https://zzonglove.tistory.com/32
+// 피보나치 수열을 행렬로 구하는 법과 같은 원리를 이용해 접근하면 O(logN)에 풀이 가능하다
+// 참고: 7677
 #include <iostream>
 #include <string>
 using namespace std;
