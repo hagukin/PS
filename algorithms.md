@@ -237,6 +237,7 @@ F(n) = a1 * F(n-1) + a2 * F(n-2) + ... ak * F(n-k) 라는 재귀식으로 표현
 행렬곱을 n번 하는 것, 즉 행렬의 N 거듭제곱을 구할 때는 log2에 구할 수 있는 행렬거듭제곱 알고리즘을 사용한다.  
 ![image](https://user-images.githubusercontent.com/63915665/195066304-9c24da71-3fcf-45ee-9b3d-c4e070bd6e68.png)  
 사진: 피보나치 수열 구하는 과정 (O(logN))  
+[1 1]\[1 0] 행렬을 구하는 방법은 어렵지 않은데, 그냥 잘 생각해보면 구할 수 있다. F(n) = 1\*F(n-1) + 1\*F(n-2)이므로 첫째 행에는 1 1이 들어가고, F(n-1) = 1\*F(n-1) + 0\*F(n-2)이므로 둘째 행에는 1 0이 들어간다.  
 
 [참고글1](https://ohgym.tistory.com/1)  
 [참고글2](https://zzonglove.tistory.com/31)  
