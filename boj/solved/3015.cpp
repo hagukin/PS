@@ -2,14 +2,15 @@
 #include <vector>
 using namespace std;
 long N;
-vector<pair<long,long >> arr;
+vector<pair<long,long >> arr; // 문제 조건이 키가 2^31까지 가능하다 인데 int는 양수범위일때 2^31-1까지만 표현이 가능하므로 long 사용.
+// unsigned int로도 풀이 가능해보이지만 내가 구현한 로직에서 prevI를 -1로 처음에 두고 시작해야 하므로 귀찮아서 일단 long으로 풀이
 long ret = 0;
 
 int main()
 {
     cin >> N;
     pair<long,long> tmp;
-    long i=0; long prevI=-1;
+    long i=0; long prevI=-1; // prevI의 초기값이 -1이어야 하는 이유: i>prevI 조건문을 처음 루프에서 만족한 상태여야 tmp가 초기화가 되기 때문.
     while (i<N)
     {
         // 같은 인풋에 대해 한번 더 루프를 도는 경우 cin을 무시하고 계속 이전 tmp값으로 진행
@@ -55,3 +56,4 @@ int main()
     
     return 0;
 }
+
