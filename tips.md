@@ -43,5 +43,13 @@ for (auto& x : arr)
 ```c++
 vector<int> v{1,2,3,4};
 ```  
+* cmp 구현 시 조건이 true면 그냥 놔두고 false면 순서를 바꿔준다
+```c++
+// 오름차순 구현
+bool cmp(const pair<int, int> &a, const pair<int, int> &b)
+{
+    return a.first < b.first;
+}
+```
 
 [그 외 참고하면 좋은 팁들](https://kswims.tistory.com/137)
