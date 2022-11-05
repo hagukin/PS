@@ -290,3 +290,8 @@ TODO
 참고문제: 백준 9466  
 ### 오일러 투어
 [참고글](https://nicotina04.tistory.com/157)  
+
+# LCS
+DP로 구현한다.  
+시간복잡도: O(MN) 배열길이 각각 M,N  
+[참고글](https://velog.io/@emplam27/알고리즘-그림으로-알아보는-LCS-알고리즘-Longest-Common-Substring와-Longest-Common-Subsequence)
