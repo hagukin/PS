@@ -51,7 +51,7 @@ bool cmp(const pair<int, int> &a, const pair<int, int> &b)
     return a.first < b.first;
 }
 ```
-* <algorithm> lower_bound, upper_bound
+* <algorithm> lower_bound, upper_bound  
 https://modoocode.com/298  
 
 [그 외 참고하면 좋은 팁들](https://kswims.tistory.com/137)
