@@ -1,60 +1,46 @@
 #include <iostream>
 #include <vector>
-#include <cstring>
-#include <set>
 using namespace std;
-int N, M;
-bool visited[500001];
-int group[500001]; // 소속된 그룹의 루트노드번호
+int n, m;
+int uf[500001]; // 무방향이므로 루트는 해당 그룹의 가장 작은 수로 통일
 
-bool dfs(int c, vector<vector<int>>& adjList)
+int getRoot(int x)
 {
-    bool ret = false;
-    visited[c] = true;
-    for (int& next : adjList[c])
-    {
-        if (group[next] == group[c]) return true;
-        group[next] = group[c];
-        ret |= dfs(next, adjList);
-    }
-    return ret;
-}
-
-bool checkCycle(vector<vector<int>>& adjList)
-{
-    for (int i=0;i<N;++i)
-        group[i] = i;
-    for (int i=0;i<N;++i)
-    {
-        if (visited[i]) continue;
-        if (dfs(i, adjList)) return true;
-    }
-    return false;
+    int curr = x;
+    int root = uf[x];
+    if (curr == root) return curr;
+    
+    int funcRet = getRoot(root);
+    uf[x] = funcRet;
+    return funcRet;
 }
 
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
-    memset(visited, false, sizeof(visited));
+    cin >> n >> m;
     
-    cin >> N >> M;
+    for (int i=0;i<=n;++i) uf[i] = i;
     vector<int> tmp;
-    vector<vector<int>> adjList(N+1, tmp);
+    vector<vector<int>> adjList(n, tmp);
     
-    int a, b, turn = 0;
-    for (int i=0;i<M;++i)
+    int a, b;
+    for (int i=1;i<=m;++i)
     {
         cin >> a >> b;
-        adjList[a].push_back(b);
-        adjList[b].push_back(a);
+        int ra = getRoot(a);
+        int rb = getRoot(b);
         
-        if (checkCycle(adjList)) 
+        if (ra == rb)
         {
             cout << i << '\n';
             return 0;
         }
+        else if (ra < rb) uf[rb] = ra;
+        else uf[ra] = rb;
     }
     cout << 0 << '\n';
+
     return 0;
 }
