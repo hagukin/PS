@@ -1,10 +1,11 @@
 #include <iostream>
+#include <vector>
+#include <algorithm>
 using namespace std;
 int N;
 int A[100001];
-int B[100001];
-int nPosA[100001]; // nPosA[i] = 숫자 i가 A에서 몇번 인덱스에 위치하는지
-int nPosB[100001];
+int tmp2[100001]; // tmp2[i] = i라는 숫자가 B에서 몇번 idx에 있는가
+int bIdx[100001]; // bIdx[i] = A[i]라는 숫자가 B에서 몇번 idx에 있는가
 
 int main()
 {
@@ -14,30 +15,50 @@ int main()
     for (int i=0;i<N;++i)
     {
         cin >> A[i];
-        nPosA[A[i]] = i;
+    }
+    int tmp;
+    for (int i=0;i<N;++i)
+    {
+        cin >> tmp;
+        tmp2[tmp] = i; // 메모리 최적화를 위해 B[i] 배열은 기록하지 않는다 (필요가 없음)
     }
     for (int i=0;i<N;++i)
     {
-        cin >> B[i];
-        nPosB[B[i]] = i;
+        bIdx[i] = tmp2[A[i]];
     }
     
     /*
-    AB
+    인풋:
+    5
     3 1 4 2 5
     1 3 5 2 4
-    nPosAB
-    - 1 3 0 2 4
-    - 0 3 1 4 2
     
-    LCS는 1,4
-    1다음에 4가 나왔다. 양쪽의 nPos 1,4는
-    각각 1,2 그리고 0,4이므로 둘다 증가한다.
+    3 1 4 5 2 기준으로 idx 나열시
+    3 1 4 5 2 는 그대로
+    0 1 2 3 4
     
-    즉 이 문제는 nPosA, nPosB를 모두 고려한 LIS를 구하는 문제이다.
-    (원래 LIS는 하나의 배열에 대해서만 구하는데, 
-    대신 nPosA, nPosB 모두 증가해야만 Increase한다고 판정하는 것으로 답을 구할 수 있다.)
+    1 3 5 2 4 는
+    1 0 4 3 2 로 표현 가능
+    (3의 idx=1), (1의 idx=0), (4의 idx=4) ...
+    
+    A의 인덱스는 증가하는 수열 0 1 2 3 4니까 
+    1 0 4 2 3에서 LIS를 찾는다는 것은
+    B의 인덱스와 A의 인덱스 양쪽 모두가 증가하는 방향의 최대 길이의 수열을 찾는 것을 의미
+    => 우리가 구하려는 LCS가 바로 이거!
+    
+    최종적으로 1 0 4 2 3의 LIS를 구하면 끝
     */
     
+    // LIS
+    vector<int> lis;
+    lis.push_back(bIdx[0]);
+    for (int i=0;i<N;++i)
+    {
+        int curr = bIdx[i];
+        auto ub = lower_bound(lis.begin(), lis.end(), curr);
+        if (ub == lis.end()) lis.push_back(curr);
+        else lis[ub-lis.begin()] = curr;
+    }
+    cout << lis.size() << '\n';
     return 0;
 }
