@@ -2,8 +2,8 @@
 ## 정수론
 ### 간단한 소수 판정법
 https://school.programmers.co.kr/learn/courses/14743/lessons/118834  
-N이 소수인지를 판정할 때는 2~sqrt(N) 까지만 나눠지는지 확인해보면 된다.  
-ex. 97 판정을 위해서는 2~9까지 나눠보면 된다.  
+N이 소수인지를 판정할 때는 2 ~ sqrt(N) 까지만 나눠지는지 확인해보면 된다.  
+ex. 97 판정을 위해서는 2 ~ 9까지 나눠보면 된다.  
 
 ### 에라토스테네스의 체
 최적화된 풀이  
@@ -290,6 +290,10 @@ TODO
 참고문제: 백준 9466  
 ### 오일러 투어
 [참고글](https://nicotina04.tistory.com/157)  
+
+## SCC
+### 타잔의 알고리즘
+[참고하면 좋은 글](https://yjg-lab.tistory.com/188)  
 
 # LCS (Longest Common Subsequence)
 DP로 구현한다.  
