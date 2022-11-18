@@ -294,6 +294,8 @@ TODO
 ## SCC
 ### 타잔의 알고리즘
 [참고하면 좋은 글](https://yjg-lab.tistory.com/188)  
+[참고영상](https://www.youtube.com/watch?v=wUgWX0nc4NY)  
+
 
 # LCS (Longest Common Subsequence)
 DP로 구현한다.  
