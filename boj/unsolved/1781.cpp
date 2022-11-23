@@ -1,17 +1,19 @@
+// 내가 쓴 질문글: https://www.acmicpc.net/board/view/104433
 #include <iostream>
 #include <vector>
 #include <queue>
 #include <algorithm>
 using namespace std;
-typedef pair<int,int> pp;
+typedef long long ll;
+typedef pair<ll,ll> pp;
 
 bool cmpByDeadline(const pp& a, const pp& b)
 {
-    return a.first < b.first; // 벡터 맨 뒤가 가장 데드라인 크게 정렬
+    return a.first < b.first;
 }
 
-int N, ret = 0;
-priority_queue<int> pq;
+ll N; ll ret = 0;
+priority_queue<ll> pq;
 vector<pp> v;
 
 int main()
@@ -19,7 +21,7 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
     cin >> N;
-    int A, B;
+    ll A; ll B;
     for (int i=0;i<N;++i)
     {
         cin >> A >> B;
@@ -29,7 +31,7 @@ int main()
     }
     sort(v.begin(), v.end(), cmpByDeadline);
     
-    int ramen, dead;
+    ll dead; ll ramen;
     for (int i=N;i>=1;--i)
     {
         dead = v.back().first;
