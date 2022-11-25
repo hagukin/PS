@@ -5,6 +5,7 @@
 #include <cstring>
 using namespace std;
 constexpr int UNVISITED = -1;
+constexpr int INF = 987654321;
 
 vector<int> adjList[10001];
 int ids[10001]; // 방문 순서에 의해 결정되는 id
@@ -17,6 +18,16 @@ int currId = 1; // 1부터 id 부여
 stack<int> st;
 
 vector<int> ret[10001];
+
+bool cmp(const vector<int>& v1, const vector<int>& v2)
+{
+    int t1, t2;
+    if (v1.empty()) t1 = INF;
+    else t1 = v1[0];
+    if (v2.empty()) t2 = INF;
+    else t2 = v2[0];
+    return t1 < t2;
+}
 
 void dfs(int cNode) // curr은 id가 아님에 주의
 {
@@ -74,10 +85,16 @@ int main()
         if (!ret[i].empty())
         {
             sort(ret[i].begin(), ret[i].end());
+        }
+    }
+    sort(ret, ret+V, cmp);
+    for (int i=1;i<=V;++i)
+    {
+        if (!ret[i].empty())
+        {
             for (auto& c : ret[i]) cout << c << " ";
             cout << -1 << '\n';
         }
     }
-    
     return 0;
 }
