@@ -3,6 +3,9 @@ https://github.com/williamfiset/Algorithms
 https://chanhuiseok.github.io/categories/algorithm/
 https://www.youtube.com/@WilliamFiset-videos/videos
 
+알고리즘들이 정리된 좋은 블로그
+https://chanhuiseok.github.io/categories/algorithm/
+
 위상정렬(DFS) 하는 동안 내부에 사이클이 있는지 확인법
 https://www.acmicpc.net/board/view/25415
 
@@ -24,3 +27,4 @@ boj 2211 내 코드 참고
 c++ 문자열 파싱 연습용으로 다시 풀어보면 좋을 듯함  
 https://school.programmers.co.kr/learn/courses/30/lessons/92335  
 https://wadekang.tistory.com/m/7  
+
