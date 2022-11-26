@@ -87,7 +87,8 @@ int main()
             sort(ret[i].begin(), ret[i].end());
         }
     }
-    sort(ret, ret+V, cmp);
+    
+    sort(ret+1, ret+V+1, cmp);
     for (int i=1;i<=V;++i)
     {
         if (!ret[i].empty())
