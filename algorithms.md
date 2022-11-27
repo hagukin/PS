@@ -294,6 +294,7 @@ TODO
 ## SCC
 ### 타잔의 알고리즘
 [참고하면 좋은 글](https://yjg-lab.tistory.com/188)  
+[참고글2](https://taesung1993.tistory.com/m/53)
 [참고영상](https://www.youtube.com/watch?v=wUgWX0nc4NY)  
 
 
