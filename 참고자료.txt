@@ -31,3 +31,5 @@ c++ 문자열 파싱 연습용으로 다시 풀어보면 좋을 듯함
 https://school.programmers.co.kr/learn/courses/30/lessons/92335  
 https://wadekang.tistory.com/m/7  
 
+코드 깔끔하게 잘 짜시는 분 블로그 (백준, 리트코드)  
+https://chanqun.tistory.com/category/algorithm/algorithm  
