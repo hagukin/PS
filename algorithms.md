@@ -302,3 +302,10 @@ TODO
 DP로 구현한다.  
 시간복잡도: O(MN) 배열길이 각각 M,N  
 [참고글](https://velog.io/@emplam27/알고리즘-그림으로-알아보는-LCS-알고리즘-Longest-Common-Substring와-Longest-Common-Subsequence)
+
+# 플로이드 와셜 알고리즘
+모든 정점쌍간의 최단거리들을 구하는 알고리즘으로 O(|V|^3)이라는 시간복잡도 때문에 가급적 사용을 지양하는 편이 좋다.  
+다익스트라와 유사하면서도 다르며, 다익스트라를 n번 돌리는 것과는 다르다.  
+실제 구현은 다익스트라보다 훨씬 쉽게 3중 for loop 하나만으로 가능하다.  
+[참고글](https://blog.encrypted.gg/917)  
+
