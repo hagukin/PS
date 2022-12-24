@@ -1,6 +1,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <memory.h>
 
 using namespace std;
 
@@ -18,29 +19,69 @@ using namespace std;
 그후 덮인 지점 및 그 덮인 지점과 같은 포인터를 공유하는 지점들을 제거해주고
 같은 과정을 반복하면 답이 나올 듯 하다.
 
-친구 8명에 for loop, 커봐야 O(400)이니까 충분히 가능.
+친구 8명에 for loop, 커봐야 O(40000)이니까 충분히 가능.
 */
 
-bool weakWalls[201] = {0,};
-int walls[401]; // walls[i] = 101이 0번일 때 i=101+d만큼 이동했을 때의 외벽 위치
 
 int solution(int n, vector<int> weak, vector<int> dist) 
 {
     int answer = 0;
     
-    // 초기화
-    // 무조건 101번이 weakWalls 0번, 그리고 100+n번이 weakWalls n번과 맵핑된다.
-    // 그 후 101+n은 다시 0, 100+2n은 n과 맵핑, 이를 401 도착할 때까지 반복한다.
-    for (const int& i : weak) weakWalls[i] = true;
+    bool walls[201] = {false,}; // 취약할 경우 true
+    int wallIdx[401] = {0,}; // i번 도착지점이 벽의 몇번 지점과 맵핑되는지
+    memset(wallIdx, -1, sizeof(wallIdx));
     
-    for (int i=0;i<n;++i)
+    // 반시계 이동
+    for (int j=100;j>=0;j-=n)
     {
-        walls[101+i] = i;
+        for (int i=0;i<n;++i)
+        {
+            if (j-i<0) break;
+            if (i==0) wallIdx[j-i] = 0;
+            else wallIdx[j-i] = n-i;
+        }
     }
-    // TODO
     
-    // 풀이
-    // TODO
+    // 시계 이동
+    for (int j=100;j<401;j+=n)
+    {
+        for (int i=0;i<n;++i)
+        {
+            if (j+i>=401) break;
+            wallIdx[j+i] = i;
+        }
+    }
+    
+    // solve
+    // 다른 풀이로 접근해야할 듯, 그리디 반례가 있을거라는 느낌이 강하게 듬
+    // 사지방 시간상 반례찾는건 나중으로
+//     int maxRepCnt = 0;
+//     vector<int> repaired;
+//     for (int i=0;i<401;++i)
+//     {
+//         for (int j=0;j<n;++j)
+//         {
+//             int repairCnt = 0;
+//             vector<int> tmp;
+//             if (wallIdx[i+j] != -1)
+//             {
+//                 repairCnt++;
+//                 tmp.push_back(wallIdx[i+j]);
+//             }
+//         }
+//         if (repairCnt > maxRepCnt)
+//         {
+            
+//         }
+//     }
+    
+    
+    // 테스트
+    // for (int i=0;i<401;++i)
+    // {
+    //     cout << i << " " << wallIdx[i] << endl;
+    // }
+    
     
     return answer;
 }
