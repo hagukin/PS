@@ -51,7 +51,23 @@ bool cmp(const pair<int, int> &a, const pair<int, int> &b)
     return a.first < b.first;
 }
 ```
-* <algorithm> lower_bound, upper_bound  
+* make_pair와 rvalue
+```c++
+int A,B;
+for (int i=0;i<N;++i)
+{
+    cin >> A >> B;
+    v.push_back(make_pair<int,int>(A,B)); // error: cannot bind rvalue reference of type ‘int&&’ to lvalue of type ‘int’
+    
+    // 해결법들
+    v.push_back({A,B}); // 간단한 방법
+    v.push_back(make_pair(A,B)); // 컴파일러에게 타입을 알아서 정하라고 하는 방법
+    v.push_back(make_pair<int,int>(std::move(A),std::move(B)); // 수동으로 lvalue로 바꿔주는 방법
+}
+```
+원인: https://stackoverflow.com/questions/68732574/insertion-in-map-using-array-error-cannot-bind-rvalue-reference-of-type-int  
+
+* #\<algorithm\> lower_bound, upper_bound  
 https://modoocode.com/298  
 
 [그 외 참고하면 좋은 팁들](https://kswims.tistory.com/137)
