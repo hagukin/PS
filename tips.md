@@ -63,6 +63,9 @@ for (int i=0;i<N;++i)
     v.push_back({A,B}); // 간단한 방법
     v.push_back(make_pair(A,B)); // 컴파일러에게 타입을 알아서 정하라고 하는 방법
     v.push_back(make_pair<int,int>(std::move(A),std::move(B)); // 수동으로 lvalue로 바꿔주는 방법
+    
+    // 참고
+    pair<int, pair<int,int>> pp = {0, {1, 3}}; // 가능!
 }
 ```
 원인: https://stackoverflow.com/questions/68732574/insertion-in-map-using-array-error-cannot-bind-rvalue-reference-of-type-int  
