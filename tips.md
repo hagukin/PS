@@ -70,4 +70,9 @@ for (int i=0;i<N;++i)
 * #\<algorithm\> lower_bound, upper_bound  
 https://modoocode.com/298  
 
+* char로 된 숫자를 int로  
+```c++
+char c = '5';
+int ci = c - '0';
+```
 [그 외 참고하면 좋은 팁들](https://kswims.tistory.com/137)
