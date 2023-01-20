@@ -280,6 +280,9 @@ TODO
 ## Lower_bound vs Upper_bound  
 ![image](https://user-images.githubusercontent.com/63915665/185752220-2f6d3103-82a4-41d1-99c5-b575168554ff.png)  
 
+## 파라메트릭 서치
+[이분탐색과의 차이점](https://marades.tistory.com/7)  
+예제: boj 3079  
 
 # 그래프
 ## 사이클 탐색
