@@ -125,9 +125,9 @@ int getDiff(int a, int b)
     return tmp;
 }
 
-int memo[10001]; // memo[depth]: depth번 자리까지 맞힌 상태가 되기 위한 이동횟수 (최소)
+int memo[10001] = {0,}; // memo[depth]: depth번 자리까지 맞힌 상태가 되기 위한 이동횟수 (최소)
 string A, B;
-int ret[10001];
+int ret[10001] = {0,};
 
 int recursive(int depth, int cnt, int posMoves)
 {
@@ -136,12 +136,13 @@ int recursive(int depth, int cnt, int posMoves)
     // posMoves: 그동안 상위 숫자나사에서 좌측으로 돌린 누적횟수. 
     // 이만큼 먼저 돌려놓은 상태에서 시작해야 함.
     
-    cout << "d: " << depth+1 << "cnt: " << cnt << "posMoves: " << posMoves << endl; 
+    // 디버그 시 depth N에서 이상한 값이 나오는 건 정상(배열 길이보다 크므로)
+    cout << "d: " << depth+1 << " cnt: " << cnt << " posMoves: " << posMoves  << " cA: " << A[depth]-'0' << " cB: " << B[depth]-'0' << endl; 
     
     if (depth == N) return cnt; // 기저, 다맞힘
     
-    int cA = A[depth]+posMoves;
-    int cB = B[depth];
+    int cA = ((A[depth]-'0')+posMoves)%10;
+    int cB = B[depth]-'0';
     
     int posM = getDiff(cA,cB); // 왼쪽 회전
     int negM = posM - 10; // 우측 회전 (음수)
@@ -164,7 +165,6 @@ int recursive(int depth, int cnt, int posMoves)
 int main()
 {
     cin >> N >> A >> B;
-    
     cout << recursive(0, 0, 0) << '\n';
     for (int i=0;i<N;++i)
         cout << i+1 << " " << ret[i] << '\n';
