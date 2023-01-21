@@ -26,7 +26,9 @@ https://www.acmicpc.net/blog/view/9
 
 Djikstra  
 https://techbless.github.io/2020/11/05/C-다익스트라-알고리즘-구현과-다익스트라-경로-출력-방법/
-boj 2211 내 코드 참고
+boj 2211 내 코드 참고  
+https://iq.opengenus.org/time-and-space-complexity-of-dijkstra-algorithm/  
+다익스트라 구현법 별 시간복잡도 및 그 도출 과정  
 
 프로그래머스 - k진수에서 소수 개수 구하기 (소수 판정 및 문자열 파싱)  
 c++ 문자열 파싱 연습용으로 다시 풀어보면 좋을 듯함  
