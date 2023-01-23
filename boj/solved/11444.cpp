@@ -4,7 +4,7 @@ using namespace std;
 typedef long long ll;
 typedef vector<ll> Vec2;
 typedef vector<vector<ll >> Mat2;
-constexpr int MOD = 1000000007LL;
+constexpr int MOD = 1000000007;
 ll N;
 Vec2 fibVec = {0,1};
 Mat2 fibMat {{0,1},{1,1}};
