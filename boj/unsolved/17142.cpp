@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 typedef pair<int,int> P; // y,x
 constexpr int WALL = -1;
@@ -11,7 +12,7 @@ P viruses[10]; // 시작 바이러스들에 0~9까지의 id를 매기고 각 바
 
 void spread(vector<vector<int >>& cGrid, vector<P>& roots)
 {
-    
+    return; // TODO
 }
 
 inline bool isAllFilled(vector<vector<int>> cGrid)
@@ -37,7 +38,7 @@ void doWithComb(vector<int>& cv)
         for (int j=0;j<N;++j)
         {
             if (initGrid[i][j] == 1) cGrid[i][j] = WALL;
-            else if (initGrid[i][j] == 0) cGrid[i][j] = BLANK;
+            else if (initGrid[i][j] == 0 || initGrid[i][j] == 2) cGrid[i][j] = BLANK;
         }
     }
     
@@ -51,6 +52,22 @@ void doWithComb(vector<int>& cv)
     
     // 일단 첫 step 돌림.
     spread(cGrid, roots);
+    
+    
+    /*** DEBUG ***/
+    for (int i=0;i<N;++i)
+    {
+        for (int j=0;j<N;++j)
+        {
+            if (cGrid[i][j] == WALL) cout << '#';
+            else if (cGrid[i][j] == BLANK) cout << '.';
+            else cout << cGrid[i][j];
+        }
+        cout << endl;
+    }
+    cout << "================" << endl;
+    
+    
     
     // 클리어 가능한 격자인지 판정
     if (!isAllFilled(cGrid)) return;
@@ -86,6 +103,12 @@ void combination(int pick, int searched, vector<int>& cv)
     // -> pick이 7이고 searched가 5인데 cv.size()가 0이면 어차피 남은 어떤 경우에도 7개를 뽑을 수 가 없으므로 곧장 탐색 종료시켜버려도 됨.)
     if (cv.size() == pick)
     {
+        /*** DEBUG ***/
+        for (auto i : cv) cout << i << ", ";
+        cout << endl;
+        
+        
+        
         return doWithComb(cv);
     }
     else if ((9-searched) < (pick-cv.size())) return; // TODO: +-1 오차있을수도, 검증 필요
@@ -140,16 +163,21 @@ int main()
     {
         for (int j=0;j<51;++j)
         {
-            grid[i][j] = 1;
+            initGrid[i][j] = 1;
         }
     }
     
     cin >> N >> M;
+    int vCnt = 0;
     for (int i=0;i<N;++i)
     {
         for (int j=0;j<N;++j)
         {
-            cin >> grid[i][j];
+            cin >> initGrid[i][j];
+            if (initGrid[i][j] == 2)
+            {
+                viruses[vCnt++] = {i,j};
+            }
         }
     }
     
