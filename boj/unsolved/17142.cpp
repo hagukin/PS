@@ -8,6 +8,7 @@ constexpr int BLANK = 987654321;
 int N, M;
 int ret = -1;
 int initGrid[51][51];
+int virusCnt = 0; // 비활성, 활성 모두 포함한 바이러스 수 (2 갯수)
 P viruses[10]; // 시작 바이러스들에 0~9까지의 id를 매기고 각 바이러스의 좌표 저장
 
 void spread(vector<vector<int >>& cGrid, vector<P>& roots)
@@ -107,11 +108,10 @@ void combination(int pick, int searched, vector<int>& cv)
         for (auto i : cv) cout << i << ", ";
         cout << endl;
         
-        
-        
         return doWithComb(cv);
     }
     else if ((9-searched) < (pick-cv.size())) return; // TODO: +-1 오차있을수도, 검증 필요
+    else if (virusCnt-1 <= searched) return; // e.g. 바이러스가 3갠데 viruses[3 이상]을 탐색하면 안되기 때문
     
     cv.push_back(searched+1); // 선택한 경우
     combination(pick, searched+1, cv);
@@ -168,7 +168,6 @@ int main()
     }
     
     cin >> N >> M;
-    int vCnt = 0;
     for (int i=0;i<N;++i)
     {
         for (int j=0;j<N;++j)
@@ -176,7 +175,9 @@ int main()
             cin >> initGrid[i][j];
             if (initGrid[i][j] == 2)
             {
-                viruses[vCnt++] = {i,j};
+                viruses[virusCnt].first = i;
+                viruses[virusCnt].second = j;
+                virusCnt++;
             }
         }
     }
