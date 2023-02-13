@@ -1,62 +1,57 @@
 #include <iostream>
-#include <algorithm>
-#include <stack>
 #include <vector>
 #include <cstring>
+#include <algorithm>
 using namespace std;
-constexpr int UNVISITED = -1;
+
+constexpr int MAXN = 10002;
 constexpr int INF = 987654321;
+constexpr int UNVISITED = -1;
 
-vector<int> adjList[10001];
-int ids[10001]; // 방문 순서에 의해 결정되는 id
-int low[10001]; // low[i]: i번 id노드에서 방문가능한 노드중 가장 작은 id
-bool isInStack[10001] = {false,};
 int V, E;
-int sccCnt = 0;
-int currId = 1; // 1부터 id 부여
 
-stack<int> st;
+bool edges[MAXN][MAXN] = {false,};
 
-vector<int> ret[10001];
+vector<int> st; // real id 저장
+bool isInStack[MAXN] = {false,}; // isInStack[real id] : 스택에 현재 들어있는지 확인
+int ids[MAXN] = {0, }; // ids[input id] : 방문여부 확인 및 id 맵핑
+int lows[MAXN] = {0, }; // lows[real id] : low값 확인
+int sccCnt = 0; // 정확히는 cnt+1 개 있음
+int cId = 0;
 
-bool cmp(const vector<int>& v1, const vector<int>& v2)
+void dfs(int curr) // curr은 input id임에 유의
 {
-    int t1, t2;
-    if (v1.empty()) t1 = INF;
-    else t1 = v1[0];
-    if (v2.empty()) t2 = INF;
-    else t2 = v2[0];
-    return t1 < t2;
-}
-
-void dfs(int cNode) // curr은 id가 아님에 주의
-{
-    ids[cNode] = currId++;
-    low[cNode] = ids[cNode];
-    st.push(cNode);
-    isInStack[cNode] = true;
+    ids[curr] = ++cId; // 1번부터 번호매김
+    int& nId = ids[curr];
+    lows[nId] = nId;
     
-    for (int& child : adjList[cNode])
-    {
-        if (ids[child] == UNVISITED)
-            dfs(child);
-        if (isInStack[child]) low[cNode] = min(low[child], low[cNode]); // 중요
-    }
+    st.push_back(nId);
+    isInStack[nId] = true;
     
-    if (ids[cNode] == low[cNode]) // 루트
+    for (int i=1;i<=V;++i) // 엣지탐색
     {
-        while (st.top() != cNode)
+        if (edges[curr][i])
         {
-            int tmp = st.top();
-            ret[cNode].push_back(tmp);
-            isInStack[tmp] = false;
-            // low[tmp] = ids[cNode]; // 만약 low를 scc별로 묶고 싶다면
-            st.pop();
+            if (ids[i] == UNVISITED) dfs(i);
+            // 이미 방문했더라도 값을 업데이트해주어야 할 수도 있음 (e.g. 0-1-2-0순 dfs)
+            if (isInStack[ids[i]])
+                lows[nId] = min(lows[nId], lows[ids[i]]);
         }
-        ret[cNode].push_back(cNode); // 자기자신도 출력해야 하므로
-        st.pop();
-        sccCnt += 1;
     }
+    
+    
+    // for (int i : st) cout << i << "stack ";
+    // cout << endl;
+    
+    int stTop = st.back();
+    while (stTop != lows[nId])
+    {
+        st.pop_back();
+        stTop = st.back();
+    }
+    st.pop_back();
+    
+    sccCnt++;
     return;
 }
 
@@ -64,38 +59,27 @@ int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
-    memset(ids, UNVISITED, sizeof(ids));
     
     cin >> V >> E;
     int A, B;
-    for (int i=1;i<=E;++i)
+    
+    for (int i=0;i<E;++i)
     {
         cin >> A >> B;
-        adjList[A].push_back(B);
+        edges[A][B] = true;
     }
-
+    memset(ids, UNVISITED, sizeof(ids));
+    
+    // SCC
+    // 구현시 주의: 초기 지정받은 id와 실제 사용할 id가 다른 것을 인지하고 구현
+    // 무작위 노드에서 (여기서는 input id가 1인 노드에 해당) dfs 시작
     for (int i=1;i<=V;++i)
     {
-        if (ids[i] == UNVISITED) dfs(i);
+        cout << "DEBUG::::ERROR" << i << endl;
+        if (ids[i] != UNVISITED) continue;
+        dfs(i);
     }
     
     cout << sccCnt << '\n';
-    for (int i=1;i<=V;++i)
-    {
-        if (!ret[i].empty())
-        {
-            sort(ret[i].begin(), ret[i].end());
-        }
-    }
-    
-    sort(ret+1, ret+V+1, cmp);
-    for (int i=1;i<=V;++i)
-    {
-        if (!ret[i].empty())
-        {
-            for (auto& c : ret[i]) cout << c << " ";
-            cout << -1 << '\n';
-        }
-    }
     return 0;
 }
