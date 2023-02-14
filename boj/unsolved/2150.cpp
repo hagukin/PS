@@ -16,6 +16,7 @@ vector<int> st; // real id 저장
 bool isInStack[MAXN] = {false,}; // isInStack[real id] : 스택에 현재 들어있는지 확인
 int ids[MAXN] = {0, }; // ids[input id] : 방문여부 확인 및 id 맵핑
 int lows[MAXN] = {0, }; // lows[real id] : low값 확인
+int idMap[MAXN] = {0, }; // real id를 input id로
 int sccCnt = 0; // 정확히는 cnt+1 개 있음
 int cId = 0;
 
@@ -39,19 +40,17 @@ void dfs(int curr) // curr은 input id임에 유의
         }
     }
     
-    
-    // for (int i : st) cout << i << "stack ";
-    // cout << endl;
-    
-    int stTop = st.back();
-    while (stTop != lows[nId])
+    if (nId == lows[nId])
     {
-        st.pop_back();
-        stTop = st.back();
+        while (true)
+        {
+            int cn = st.back();
+            isInStack[cn] = false;
+            st.pop_back();
+            if (cn == nId) break;
+        }
+        sccCnt++;
     }
-    st.pop_back();
-    
-    sccCnt++;
     return;
 }
 
@@ -75,11 +74,39 @@ int main()
     // 무작위 노드에서 (여기서는 input id가 1인 노드에 해당) dfs 시작
     for (int i=1;i<=V;++i)
     {
-        cout << "DEBUG::::ERROR" << i << endl;
-        if (ids[i] != UNVISITED) continue;
-        dfs(i);
+        if (ids[i] == UNVISITED) dfs(i);
     }
     
     cout << sccCnt << '\n';
+    
+    for (int i=1;i<=V;++i) idMap[ids[i]] = i;
+    
+    vector<int> retV[MAXN];
+    for (int i=1;i<=V;++i)
+    {
+        retV[lows[i]].push_back(idMap[i]);
+    }
+    
+    for (int i=1;i<=V;++i)
+    {
+        if (!retV[i].empty())
+        {
+            for (int j : retV[i]) cout << j << " ";
+            cout << " ====== " << endl;
+        }
+    }
+    
+    
+    // for (int i=1;i<=V;++i)
+    // {
+    //     if (!retV[i].empty())
+    //     {
+    //         sort(retV[i].begin(), retV[i].end());
+    //         cout << "DEBUG  " << i << endl;
+    //         for (int j : retV[i]) cout << j << " ";
+    //         cout << -1 << '\n';
+    //     }
+    // }
+    
     return 0;
 }
