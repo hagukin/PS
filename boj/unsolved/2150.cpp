@@ -70,8 +70,6 @@ int main()
     memset(ids, UNVISITED, sizeof(ids));
     
     // SCC
-    // 구현시 주의: 초기 지정받은 id와 실제 사용할 id가 다른 것을 인지하고 구현
-    // 무작위 노드에서 (여기서는 input id가 1인 노드에 해당) dfs 시작
     for (int i=1;i<=V;++i)
     {
         if (ids[i] == UNVISITED) dfs(i);
@@ -87,26 +85,22 @@ int main()
         retV[lows[i]].push_back(idMap[i]);
     }
     
+    // {{}, {}, ... {1,5,4}, ... {7,3,2}, ... {6} ... {}, {}}
+    // 를 내부 정렬한 후 첫자리 오름차 순으로 정렬해야 함.
+    
+    // 내부 정렬
     for (int i=1;i<=V;++i)
     {
         if (!retV[i].empty())
         {
-            for (int j : retV[i]) cout << j << " ";
-            cout << " ====== " << endl;
+            vector<int> tmp;
+            for (int j : retV[i]) tmp.push_back(j);
+            sort(tmp.begin(), tmp.end());
+            retV[i] = tmp;
         }
     }
     
-    
-    // for (int i=1;i<=V;++i)
-    // {
-    //     if (!retV[i].empty())
-    //     {
-    //         sort(retV[i].begin(), retV[i].end());
-    //         cout << "DEBUG  " << i << endl;
-    //         for (int j : retV[i]) cout << j << " ";
-    //         cout << -1 << '\n';
-    //     }
-    // }
-    
+    // 첫자리 기준 정렬
+    // TODO
     return 0;
 }
