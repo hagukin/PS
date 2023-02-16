@@ -1,5 +1,44 @@
 # 수학
+## 조합론
+### 순열, 조합
+[기본공식 이해 및 순열, 조합의 관계 참고글](https://m.blog.naver.com/galaxyenergy/222537080429)  
+[조합 기본성질들](https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=vollollov&logNo=220919085017)  
+- 기본성질을 이해해야 파스칼 삼각형 DP 구현법 이해 가능  
+
 ## 정수론
+### 모듈로
+[참고글 - 시계로 접근하는 모듈로](https://ko.khanacademy.org/computing/computer-science/cryptography/modarithmetic/a/what-is-modular-arithmetic)  
+
+일반적으로 모듈러는 0 혹은 양수만을 반환한다는 것을 인지하자.  
+**C++를 포함한** 일부 언어에서는 음수 모듈러에 대해 음수 결과값이 나올 수도 한다.  
+[참고](https://torbjorn.tistory.com/245)  
+-5 % 4 = -1 (C++17)  
+-5 % 4 = 3 (python3)  
+
+---  
+계산 예시:  
+17 % 5 = 2  
+7 % 11 = 7 (유사: 3 % 5 = 3, 2 % 10000 = 2 시계원리 생각하면 쉽다)  
+11 % 11 = 0  
+  
+음수의 모듈러 연산일 경우 다음과 같다. (c++17)  
+-5 % 4 = -1  
+python3 형태로 변경하려면 구한 값에 +b를 해주면 된다. (a % b꼴)  
+-5 % 4 + 4 = 3  
+
+음수의 모듈러는 비직관적인데, 시계로 접근하면 이해가 쉽다. (위 참고글 참고)  
+a % b일 때 a가 음수면 a만큼의 **반시계 방향** 이동이라 생각하면 된다.  
+
+#### 모듈로 연산 분배법칙
+[참고글](https://velog.io/@gidskql6671/%EB%82%98%EB%A8%B8%EC%A7%80Modulo-%EC%97%B0%EC%82%B0-%EB%B6%84%EB%B0%B0%EB%B2%95%EC%B9%99)  
+
+#### 모듈로 곱셈 역원
+선수지식: 모듈로 연산 분배법칙
+[참고글]https://www.crocus.co.kr/1231  
+
+### 페르마의 소정리
+선수지식: 조합, 모듈로 연산의 분배법칙
+
 ### 간단한 소수 판정법
 https://school.programmers.co.kr/learn/courses/14743/lessons/118834  
 N이 소수인지를 판정할 때는 2 ~ sqrt(N) 까지만 나눠지는지 확인해보면 된다.  
