@@ -1,8 +1,8 @@
 # 수학
 ## 조합론
 ### 순열, 조합
-[기본공식 이해 및 순열, 조합의 관계 참고글](https://m.blog.naver.com/galaxyenergy/222537080429)  
-[조합 기본성질들](https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=vollollov&logNo=220919085017)  
+[* 기본공식 이해 및 순열, 조합의 관계 참고글](https://m.blog.naver.com/galaxyenergy/222537080429)  
+[* 조합 기본성질들](https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=vollollov&logNo=220919085017)  
 - 기본성질을 이해해야 파스칼 삼각형 DP 구현법 이해 가능  
 
 ## 정수론
@@ -12,8 +12,8 @@
 일반적으로 모듈러는 0 혹은 양수만을 반환한다는 것을 인지하자.  
 **C++를 포함한** 일부 언어에서는 음수 모듈러에 대해 음수 결과값이 나올 수도 한다.  
 [참고](https://torbjorn.tistory.com/245)  
--5 % 4 = -1 (C++17)  
--5 % 4 = 3 (python3)  
+-5 % 4 = -1 (C++17: 음수 결과값)  
+-5 % 4 = 3 (python3: 양수 결과값)  
 
 ---  
 계산 예시:  
@@ -31,13 +31,15 @@ a % b일 때 a가 음수면 a만큼의 **반시계 방향** 이동이라 생각�
 
 #### 모듈로 연산 분배법칙
 [참고글](https://velog.io/@gidskql6671/%EB%82%98%EB%A8%B8%EC%A7%80Modulo-%EC%97%B0%EC%82%B0-%EB%B6%84%EB%B0%B0%EB%B2%95%EC%B9%99)  
+뺄셈의 경우 양수 결과값 형태로 맞춰주려면 마지막에 +b를 해줘야 한다.  
 
 #### 모듈로 곱셈 역원
 선수지식: 모듈로 연산 분배법칙
 [참고글]https://www.crocus.co.kr/1231  
 
 ### 페르마의 소정리
-선수지식: 조합, 모듈로 연산의 분배법칙
+선수지식: 조합, 모듈로 연산의 분배법칙  
+TODO  
 
 ### 간단한 소수 판정법
 https://school.programmers.co.kr/learn/courses/14743/lessons/118834  
