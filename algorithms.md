@@ -167,6 +167,10 @@ int Euclidean(int a, int b)
 }
 ```
 
+### 확장 유클리드 알고리즘
+TODO  
+
+
 ## 계산기하
 ### Convex hull (볼록 껍질)
 일반화된 풀이
