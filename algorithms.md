@@ -1,11 +1,11 @@
-# 수학
-## 조합론
+# 1. 수학
+## A. 조합론
 ### 순열, 조합
 [* 기본공식 이해 및 순열, 조합의 관계 참고글](https://m.blog.naver.com/galaxyenergy/222537080429)  
 [* 조합 기본성질들](https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=vollollov&logNo=220919085017)  
 - 기본성질을 이해해야 파스칼 삼각형 DP 구현법 이해 가능  
 
-## 정수론
+## B. 정수론
 ### 모듈로
 [참고글 - 시계로 접근하는 모듈로](https://ko.khanacademy.org/computing/computer-science/cryptography/modarithmetic/a/what-is-modular-arithmetic)  
 
@@ -185,8 +185,7 @@ int Euclidean(int a, int b)
 ### 확장 유클리드 알고리즘
 TODO  
 
-
-## 계산기하
+## C. 계산기하
 ### Convex hull (볼록 껍질)
 일반화된 풀이
 long double을 사용하지만 테스트케이스에 따라 double이나 심지어는 float로도 풀릴 수도 있다.
@@ -301,7 +300,7 @@ int main() {
 }
 ```
 
-## 선형대수
+## D. 선형대수
 ### 행렬의 N 거듭제곱  
 A^8을 구하기 위해서는 A * A를 8번 계산하는 O(N) 풀이도 있지만,  
 A^10 = (A^4)^2라는 성질을 이용해 더 빠르게 구할 수 있다.  
@@ -362,16 +361,16 @@ TODO
 ### 슈트라센 알고리즘 (NxN 행렬간의 곱을 O(N^3)보다 빠른 O(N^2.38)에 풀이 가능)  
 TODO  
 
-# 이분탐색  
-## Lower_bound vs Upper_bound  
+# 2. 이분탐색  
+## A. Lower_bound vs Upper_bound  
 ![image](https://user-images.githubusercontent.com/63915665/185752220-2f6d3103-82a4-41d1-99c5-b575168554ff.png)  
 
-## 파라메트릭 서치
+## B. 파라메트릭 서치
 [이분탐색과의 차이점](https://marades.tistory.com/7)  
 예제: boj 3079  
 
-# 그래프
-## 사이클 탐색
+# 3. 그래프
+## A. 사이클 탐색
 [참고하면 좋은 글](https://sosoeasy.tistory.com/35)
 ### 무향 그래프에서의 사이클 탐색
 참고문제: 백준 1197  
@@ -380,8 +379,10 @@ TODO
 ### 오일러 투어
 [참고글](https://nicotina04.tistory.com/157)  
 
+## B. 최단 거리 알고리즘
 ### 다익스트라
-알고리즘 자체에 대한 설명은 생략한다.  
+설명:  
+그래프의 한 노드에서 다른 노드까지의 최단 거리를 구하는 알고리즘, 단 간선은 반드시 음수가 아니어야 한다.  
 [다익스트라 경로 출력](https://techbless.github.io/2020/11/05/C-다익스트라-알고리즘-구현과-다익스트라-경로-출력-방법/)  
 boj 2211 내 코드 참고  
 
@@ -392,20 +393,10 @@ boj 2211 내 코드 참고
 이를 응용해, 단방향 그래프에서 A,B,C ... 가 X까지 가는 최단거리들을 다익스트라 단 한번의 실행으로 구할 수 있다. (그래프의 간선의 방향을 전부 뒤집은 후 시작점을 X로 잡고 다익스트라를 실행하면 된다)  
 참고문제: 백준 1238번  
 
-
-## SCC
-### 타잔의 알고리즘
-[참고영상](https://www.youtube.com/watch?v=wUgWX0nc4NY)  
-### 코사라주 알고리즘
-
-[타잔&코사라주 참고글](https://jason9319.tistory.com/m/98)  
-
-# LCS (Longest Common Subsequence)
-DP로 구현한다.  
-시간복잡도: O(MN) 배열길이 각각 M,N  
-[참고글](https://velog.io/@emplam27/알고리즘-그림으로-알아보는-LCS-알고리즘-Longest-Common-Substring와-Longest-Common-Subsequence)
-
-# 플로이드 와셜 알고리즘
+### 플로이드 와셜 알고리즘
+설명:  
+그래프에서 가능한 모든 노드 쌍들의 최단거리를 계산하는 알고리즘, **이때 다익스트라와는 달리 간선의 크기는 음수여도 상관 없다!**  
+  
 요약: a to b를 구할 때 사이 중개점 c를 지나는 a to c to b와 a to b를 비교해 더 작은 쪽을 저장하는 과정을 반복하면 최종적으로 최단거리가 남게 된다.  
 모든 정점쌍간의 최단거리들을 구하는 알고리즘으로 O(|V|^3)이라는 시간복잡도 때문에 가급적 사용을 지양하는 편이 좋다.  
 다익스트라와 유사하면서도 다르며, 다익스트라를 n번 돌리는 것과는 다르다.  
@@ -437,10 +428,31 @@ for (int y=1;y<=n;++y) // 중개지점
 		}
 	}
 }
-```
+```  
 
-# Brute Force
-## 중간에서 만나기 (MITM, Meet in the middle) 알고리즘
+### 벨만 포드 알고리즘
+설명:  
+다익스트라와 유사하게 한 노드에서 다른 노드까지의 최단 거리를 구하는 알고리즘, **다익스트라보다 느린 대신 간선의 가중치가 음수여도 작동한다.**  
+
+TODO  
+
+## C. 최대 유량 알고리즘
+### 포드 풀커슨 알고리즘
+### 에드몬트 카프 알고리즘
+
+## D. SCC 알고리즘
+### 타잔의 알고리즘
+[참고영상](https://www.youtube.com/watch?v=wUgWX0nc4NY)  
+### 코사라주 알고리즘
+[타잔&코사라주 참고글](https://jason9319.tistory.com/m/98)  
+
+# 4. LCS (Longest Common Subsequence)
+DP로 구현한다.  
+시간복잡도: O(MN) 배열길이 각각 M,N  
+[참고글](https://velog.io/@emplam27/알고리즘-그림으로-알아보는-LCS-알고리즘-Longest-Common-Substring와-Longest-Common-Subsequence)
+
+# 5. Brute Force
+## A. 중간에서 만나기 (MITM, Meet in the middle) 알고리즘
 갯수 N인 수열의 부분수열(가능한 모든 조합)을 구하려고 할 때 만약 N이 너무 커서 조합의 갯수가 2^40 이런 식으로 지나치게 커져버리면 단순 DFS로는 시간 내에 풀기 어려워진다. 이때 사용할 수 있는 방법이 중간에서 만나기 알고리즘으로, 일단 부분수열을 절반으로 쪼갠다. 쪼개는 지점은 정확히 절반에 가까울 수록 좋다. (이유는 읽다보면 이해된다)  
 쪼개고 나면 쪼개진 수열들의 크기가 두배로 줄었기 때문에 부분수열을 구할 수 있다. (물론 애초에 N이 아주 큰 경우에는 이래도 불가능할 지도 모르긴 한다. 가능한 경우에 한해 MITM을 사용한다.)  
 앞서 말한 예시대로 N이 40이라 가능한 모든 부분수열이 2^40이었을 경우, 이걸 반으로 쪼개 20개짜리 배열 두개로 만들면 가능한 모든 부분수열이 2^20, 약 100만개 정도가 되어 DFS로 구할 수 있는 수준이 된다.  
