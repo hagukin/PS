@@ -442,20 +442,19 @@ TODO
 기본적으로 유량 그래프는 위와 같은 형태의 방향 그래프로, 하나의 간선에는 최대한 통과시킬 수 있는 유량이 정해져 있다.  
 
 ### 용어  
-* Flow: 어떤 간선을 통과중인 유량  
-* Capacity: 용량 (=남은 유량. 즉 현재 지나가고 있는 유량을 제외하고 통과할 수 있는 최대한의 유량)  
+* Flow: 어떤 간선에 흐를 수 있는 최대유량(max flow) 또는 현재 흐르는 유량(current flow)  
+* Capacity: 남은 유량. 즉 max flow - current flow.  
 * Source: 시작점, 무한한 유량을 가졌다고 가정한다. 물이 무한히 많다고 생각하면 쉽다.  
 * Sink(Target): 도착점. 보통 Source를 S로, Sink를 T로 표기하니 편의상 Target이라고도 외워두면 좋다.  
 
 * Augmenting path:  
 ![image](https://user-images.githubusercontent.com/63915665/221360133-7a0744dc-b3c8-4aaf-a8b7-7eaf36c3970a.png)  
-최대 유량 알고리즘에서 가장 중요한 개념으로, Source에서 Sink까지 이어지는 어떤 경로의 (Capacity - flow)가 1 이상이라면 이를 Augmenting path라고 부른다.  
-여기서 주의해야 될 게, flow가 1 이상인게 아니라 (Capacity - flow) 가 1 이상이라는 점인데, 이는 뒤에서 설명할 residual edge 때문이다.  
+최대 유량 알고리즘에서 가장 중요한 개념으로, Source에서 Sink까지 이어지는 어떤 경로의 capacity(max flow - curr flow)가 1 이상이라면 이를 Augmenting path라고 부른다.  
+여기서 주의해야 될 게, current flow가 1 이상인게 아니라 capacity가 1 이상이라는 점인데, 이는 뒤에서 설명할 residual edge 때문이다.  
 
 * Bottleneck value:  
 ![image](https://user-images.githubusercontent.com/63915665/221360314-1f55617a-03ee-4283-9788-f8d02f677486.png)  
-하나의 Augmenting path에 존재하는 모든 Edge들중 (Capacity - flow)가 가장 작은 Edge의 (Capacity - flow)을 Bottleneck value라고 한다.  
-augmenting path와 마찬가지로 유의해야 할 점은, 어떤 edge의 최대 flow를 구하는 게 아니라, (Capacity - flow) 를 구한다는 점이다.  
+하나의 Augmenting path에 존재하는 모든 Edge들중 capacity가 가장 작은 Edge의 capacity을 Bottleneck value라고 한다.  
 즉 0/5, 2/8, -4/0라는 edge들로 구성된 augmenting path의 bottleneck value는 min(5-0, 8-2, 0-(-4)) = 4이다.  
   
 Source로부터 최대한으로 유량을 끌어와도 해당 augmenting path의 Bottleneck value만큼밖에 Sink로 전달할 수 없기 때문에 Bottleneck이라는 표현을 사용한다.  
@@ -463,7 +462,7 @@ Source로부터 최대한으로 유량을 끌어와도 해당 augmenting path의
 * Residual edge:  
 ![image](https://user-images.githubusercontent.com/63915665/221360425-4102e06f-effb-421a-80fa-391a03b4ff22.png)  
 하나의 Augmenting path를 찾았다면 그 내부에 존재하는 모든 Edge들의 반대방향으로 residual edge라는 것을 만들어주어야 한다.  
-Residual edge란 해당 augmenting path의 bottleneck value * (-1)을 flow로 갖고 0을 capacity로 갖는 edge로, 해당 Edge가 잘못되었을 경우를(즉 최대 유량을 구하는 데 Edge 자체가 필요하지 않거나 전송해야 하는 flow의 양이 다른 경우를) 고려하기 위해 사용된다.  
+Residual edge란 해당 augmenting path의 bottleneck value * (-1)을 current flow로 갖고 0을 max flow로 갖는 edge로, 해당 Edge가 잘못되었을 경우를(즉 최대 유량을 구하는 데 Edge 자체가 필요하지 않거나 전송해야 하는 flow의 양이 다른 경우를) 고려하기 위해 사용된다.  
 
 ![image](https://user-images.githubusercontent.com/63915665/221360626-2708b6f4-87b5-4515-b468-66ee14b653dc.png)  
 이렇게 residual edge들을 가진 그래프를 Residual graph라고 하며, 통상적으로 알고리즘을 구현할 때 쓰는 그래프는 기본으로 주어지는 그래프가 아닌 이 Residual graph이다.  
@@ -480,22 +479,34 @@ Residual edge란 해당 augmenting path의 bottleneck value * (-1)을 flow로 �
 이때 2번에서 Augmenting path를 구하는 방법에 따라 알고리즘이 나뉘고, 시간복잡도 또한 달라진다.  
 종료를 하나씩 살펴보자.  
 
-### a. 포드 풀커슨 알고리즘
+### a. 포드 풀커슨 알고리즘(DFS)
 [참고영상](https://www.youtube.com/watch?v=LdOnanfc5TM&list=PLDV1Zeh2NRsDj3NzHbbFIC58etjZhiGcG)  
-최대 유량을 구하는 가장 단순한 형태의 알고리즘으로, augmenting path들을 구할 때 DFS를 사용한다.  
+정확히 따지면 위에서 언급한 알고리즘 흐름 자체를 포드 풀커슨 알고리즘이라고 하지만, 대부분 편의상 그냥 DFS를 이용해 augmenting path를 구하는 방식을 포드 풀커슨 알고리즘이라고 사용하는 듯 하다.  
+최대 유량을 구하는 알고리즘으로 augmenting path들을 구할 때 DFS를 사용한다.  
 DFS로 임의의 augmenting path를 구하는 걸 반복하는 형태로, Source에서 Sink를 찾는 DFS를 계속 반복하는 형태로 구현된다.  
+이때 어떤 Edge의 capacity가 0이면(다 찼으면) 그 edge로는 더 진행하지 않는다.  
   
 시간복잡도가 흥미로운데, O(fE)이다.  
-이때 E는 간선의 갯수, f는 그래프 모든 간선들 중 최대 capacity 값이 된다. 즉 0/1000과 같이 capacity가 큰 간선이 있으면 그에 비례해 시간복잡도도 증가한다.  
+이때 E는 간선의 갯수, f는 그래프 모든 간선들 중 최대 max flow(max flow들 중 최대값)가 된다. 즉 0/1000과 같이 max flow가 큰 간선이 있으면 그에 비례해 시간복잡도도 증가한다.  
 왜 이렇게 되는가를 이해하는 게 중요한데, 위 영상 중간부분을 참고하자.  
 
 ### b. 에드몬트 카프 알고리즘
-TODO  
+[참고영상](https://www.youtube.com/watch?v=RppuJYwlcI8&list=PLDV1Zeh2NRsDj3NzHbbFIC58etjZhiGcG&index=6)  
+augmenting path를 구할 때 BFS를 사용하는 알고리즘으로, 시간복잡도가 O(V * E^2) 꼴이라 max flow가 커도 시간복잡도에 영향을 주지 않는다는 점에서 일반적으로 포드 풀커슨보다 자주 쓰인다.  
+
+추가적으로, 포드 풀커슨 알고리즘에 비해 항상 최단 길이의 augmenting path(path를 구성하는 노드의 갯수가 최소라는 말이다. current flow의 합이나 max flow의 합과 착각하지말자!)를 찾는다는 점도 DFS에 비해 갖는 성능 상의 이점인데, path가 길어질수록 확률적으로 bottleneck value가 작아지기 때문이다. (수 많은 노드들 중에서도 제일 작은 최솟값을 bottleneck value로 사용하므로)  
+
+Source에서 Sink로의 BFS를 반복하며 그때그때 구해지는 최단길이의 augmenting path들을 구하고, 나머지는 알고리즘 흐름대로 똑같이 해주면 된다.  
+이때 DFS와 마찬가지로 capacity가 0이면(즉 다찼으면) 그 edge로는 더 진행하지 않는다.  
+augmented path가 더 없으면 bottleneck value들을 더하고 종료한다.  
 
 ### c. 그 외  
 ![image](https://user-images.githubusercontent.com/63915665/221361460-ec3beec0-a072-4c2d-9f49-9e7b53f84f76.png)  
 보면 알 수 있듯이 어떤 한 알고리즘이 압도적으로 월등하다 라고 말하기 애매하다.  
 즉 상황에 따라 최적의 알고리즘이 얼마든지 달라질 수 있다.  
+
+### 최대 유량 문제들  
+[백준 1014(리트코드 1349)](https://www.acmicpc.net/problem/1014)  
 
 ## 3-D. SCC 알고리즘
 ### a. 타잔의 알고리즘
