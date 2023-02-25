@@ -474,7 +474,8 @@ Residual edge란 해당 augmenting path의 bottleneck value * (-1)을 flow로 �
 최대 유량을 구하는 방식 자체는 대부분의 알고리즘들이 유사하다.  
 1. Residual graph를 만든다. (즉 주어진 간선들의 역방향으로 0/0 간선들을 만든다)  
 2. Residual graph에서 Augmenting path들을 구한다. (즉 residual edge들을 포함해 구한다)  
-3. 구한 Augmenting path들의 bottleneck value들의 합이 곧 최대 유량이다.  
+3. 2번을 더 이상 augmenting path를 찾을 수 없을 때까지 반복한다.  
+4. 구한 Augmenting path들의 bottleneck value들의 합이 곧 최대 유량이다.  
 
 이때 2번에서 Augmenting path를 구하는 방법에 따라 알고리즘이 나뉘고, 시간복잡도 또한 달라진다.  
 종료를 하나씩 살펴보자.  
@@ -482,8 +483,19 @@ Residual edge란 해당 augmenting path의 bottleneck value * (-1)을 flow로 �
 ### a. 포드 풀커슨 알고리즘
 [참고영상](https://www.youtube.com/watch?v=LdOnanfc5TM&list=PLDV1Zeh2NRsDj3NzHbbFIC58etjZhiGcG)  
 최대 유량을 구하는 가장 단순한 형태의 알고리즘으로, augmenting path들을 구할 때 DFS를 사용한다.  
+DFS로 임의의 augmenting path를 구하는 걸 반복하는 형태로, Source에서 Sink를 찾는 DFS를 계속 반복하는 형태로 구현된다.  
+  
+시간복잡도가 흥미로운데, O(fE)이다.  
+이때 E는 간선의 갯수, f는 그래프 모든 간선들 중 최대 capacity 값이 된다. 즉 0/1000과 같이 capacity가 큰 간선이 있으면 그에 비례해 시간복잡도도 증가한다.  
+왜 이렇게 되는가를 이해하는 게 중요한데, 위 영상 중간부분을 참고하자.  
 
 ### b. 에드몬트 카프 알고리즘
+TODO  
+
+### c. 그 외  
+![image](https://user-images.githubusercontent.com/63915665/221361460-ec3beec0-a072-4c2d-9f49-9e7b53f84f76.png)  
+보면 알 수 있듯이 어떤 한 알고리즘이 압도적으로 월등하다 라고 말하기 애매하다.  
+즉 상황에 따라 최적의 알고리즘이 얼마든지 달라질 수 있다.  
 
 ## 3-D. SCC 알고리즘
 ### a. 타잔의 알고리즘
