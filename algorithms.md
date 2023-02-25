@@ -1,11 +1,11 @@
 # 1. 수학
-## A. 조합론
+## 1-A. 조합론
 ### 순열, 조합
 [* 기본공식 이해 및 순열, 조합의 관계 참고글](https://m.blog.naver.com/galaxyenergy/222537080429)  
 [* 조합 기본성질들](https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=vollollov&logNo=220919085017)  
 - 기본성질을 이해해야 파스칼 삼각형 DP 구현법 이해 가능  
 
-## B. 정수론
+## 1-B. 정수론
 ### 모듈로
 [참고글 - 시계로 접근하는 모듈로](https://ko.khanacademy.org/computing/computer-science/cryptography/modarithmetic/a/what-is-modular-arithmetic)  
 
@@ -185,7 +185,7 @@ int Euclidean(int a, int b)
 ### 확장 유클리드 알고리즘
 TODO  
 
-## C. 계산기하
+## 1-C. 계산기하
 ### Convex hull (볼록 껍질)
 일반화된 풀이
 long double을 사용하지만 테스트케이스에 따라 double이나 심지어는 float로도 풀릴 수도 있다.
@@ -300,7 +300,7 @@ int main() {
 }
 ```
 
-## D. 선형대수
+## 1-D. 선형대수
 ### 행렬의 N 거듭제곱  
 A^8을 구하기 위해서는 A * A를 8번 계산하는 O(N) 풀이도 있지만,  
 A^10 = (A^4)^2라는 성질을 이용해 더 빠르게 구할 수 있다.  
@@ -362,15 +362,15 @@ TODO
 TODO  
 
 # 2. 이분탐색  
-## A. Lower_bound vs Upper_bound  
+## 2-A. Lower_bound vs Upper_bound  
 ![image](https://user-images.githubusercontent.com/63915665/185752220-2f6d3103-82a4-41d1-99c5-b575168554ff.png)  
 
-## B. 파라메트릭 서치
+## 2-B. 파라메트릭 서치
 [이분탐색과의 차이점](https://marades.tistory.com/7)  
 예제: boj 3079  
 
 # 3. 그래프
-## A. 사이클 탐색
+## 3-A. 사이클 탐색
 [참고하면 좋은 글](https://sosoeasy.tistory.com/35)
 ### 무향 그래프에서의 사이클 탐색
 참고문제: 백준 1197  
@@ -379,7 +379,7 @@ TODO
 ### 오일러 투어
 [참고글](https://nicotina04.tistory.com/157)  
 
-## B. 최단 거리 알고리즘
+## 3-B. 최단 거리 알고리즘
 ### 다익스트라
 설명:  
 그래프의 한 노드에서 다른 노드까지의 최단 거리를 구하는 알고리즘, 단 간선은 반드시 음수가 아니어야 한다.  
@@ -436,11 +436,11 @@ for (int y=1;y<=n;++y) // 중개지점
 
 TODO  
 
-## C. 최대 유량 알고리즘
+## 3-C. 최대 유량 알고리즘
 ### 포드 풀커슨 알고리즘
 ### 에드몬트 카프 알고리즘
 
-## D. SCC 알고리즘
+## 3-D. SCC 알고리즘
 ### 타잔의 알고리즘
 [참고영상](https://www.youtube.com/watch?v=wUgWX0nc4NY)  
 ### 코사라주 알고리즘
@@ -452,7 +452,7 @@ DP로 구현한다.
 [참고글](https://velog.io/@emplam27/알고리즘-그림으로-알아보는-LCS-알고리즘-Longest-Common-Substring와-Longest-Common-Subsequence)
 
 # 5. Brute Force
-## A. 중간에서 만나기 (MITM, Meet in the middle) 알고리즘
+## 5-A. 중간에서 만나기 (MITM, Meet in the middle) 알고리즘
 갯수 N인 수열의 부분수열(가능한 모든 조합)을 구하려고 할 때 만약 N이 너무 커서 조합의 갯수가 2^40 이런 식으로 지나치게 커져버리면 단순 DFS로는 시간 내에 풀기 어려워진다. 이때 사용할 수 있는 방법이 중간에서 만나기 알고리즘으로, 일단 부분수열을 절반으로 쪼갠다. 쪼개는 지점은 정확히 절반에 가까울 수록 좋다. (이유는 읽다보면 이해된다)  
 쪼개고 나면 쪼개진 수열들의 크기가 두배로 줄었기 때문에 부분수열을 구할 수 있다. (물론 애초에 N이 아주 큰 경우에는 이래도 불가능할 지도 모르긴 한다. 가능한 경우에 한해 MITM을 사용한다.)  
 앞서 말한 예시대로 N이 40이라 가능한 모든 부분수열이 2^40이었을 경우, 이걸 반으로 쪼개 20개짜리 배열 두개로 만들면 가능한 모든 부분수열이 2^20, 약 100만개 정도가 되어 DFS로 구할 수 있는 수준이 된다.  
