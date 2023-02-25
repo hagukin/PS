@@ -437,13 +437,58 @@ for (int y=1;y<=n;++y) // 중개지점
 TODO  
 
 ## 3-C. 최대 유량 알고리즘
-### 포드 풀커슨 알고리즘
-### 에드몬트 카프 알고리즘
+몇 가지 기본 개념을 짚고 시작하자.  
+![image](https://user-images.githubusercontent.com/63915665/221359866-259614a5-8718-4bed-8725-6527a141b0cf.png)  
+기본적으로 유량 그래프는 위와 같은 형태의 방향 그래프로, 하나의 간선에는 최대한 통과시킬 수 있는 유량이 정해져 있다.  
+
+### 용어  
+* Flow: 어떤 간선을 통과중인 유량  
+* Capacity: 용량 (=남은 유량. 즉 현재 지나가고 있는 유량을 제외하고 통과할 수 있는 최대한의 유량)  
+* Source: 시작점, 무한한 유량을 가졌다고 가정한다. 물이 무한히 많다고 생각하면 쉽다.  
+* Sink(Target): 도착점. 보통 Source를 S로, Sink를 T로 표기하니 편의상 Target이라고도 외워두면 좋다.  
+
+* Augmenting path:  
+![image](https://user-images.githubusercontent.com/63915665/221360133-7a0744dc-b3c8-4aaf-a8b7-7eaf36c3970a.png)  
+최대 유량 알고리즘에서 가장 중요한 개념으로, Source에서 Sink까지 이어지는 어떤 경로의 (Capacity - flow)가 1 이상이라면 이를 Augmenting path라고 부른다.  
+여기서 주의해야 될 게, flow가 1 이상인게 아니라 (Capacity - flow) 가 1 이상이라는 점인데, 이는 뒤에서 설명할 residual edge 때문이다.  
+
+* Bottleneck value:  
+![image](https://user-images.githubusercontent.com/63915665/221360314-1f55617a-03ee-4283-9788-f8d02f677486.png)  
+하나의 Augmenting path에 존재하는 모든 Edge들중 (Capacity - flow)가 가장 작은 Edge의 (Capacity - flow)을 Bottleneck value라고 한다.  
+augmenting path와 마찬가지로 유의해야 할 점은, 어떤 edge의 최대 flow를 구하는 게 아니라, (Capacity - flow) 를 구한다는 점이다.  
+즉 0/5, 2/8, -4/0라는 edge들로 구성된 augmenting path의 bottleneck value는 min(5-0, 8-2, 0-(-4)) = 4이다.  
+  
+Source로부터 최대한으로 유량을 끌어와도 해당 augmenting path의 Bottleneck value만큼밖에 Sink로 전달할 수 없기 때문에 Bottleneck이라는 표현을 사용한다.  
+
+* Residual edge:  
+![image](https://user-images.githubusercontent.com/63915665/221360425-4102e06f-effb-421a-80fa-391a03b4ff22.png)  
+하나의 Augmenting path를 찾았다면 그 내부에 존재하는 모든 Edge들의 반대방향으로 residual edge라는 것을 만들어주어야 한다.  
+Residual edge란 해당 augmenting path의 bottleneck value * (-1)을 flow로 갖고 0을 capacity로 갖는 edge로, 해당 Edge가 잘못되었을 경우를(즉 최대 유량을 구하는 데 Edge 자체가 필요하지 않거나 전송해야 하는 flow의 양이 다른 경우를) 고려하기 위해 사용된다.  
+
+![image](https://user-images.githubusercontent.com/63915665/221360626-2708b6f4-87b5-4515-b468-66ee14b653dc.png)  
+이렇게 residual edge들을 가진 그래프를 Residual graph라고 하며, 통상적으로 알고리즘을 구현할 때 쓰는 그래프는 기본으로 주어지는 그래프가 아닌 이 Residual graph이다.  
+우리가 최대 유량을 구할 때, 즉 augmenting path들을 구할 때는 기본적으로 주어지는 edges들 뿐만 아니라 residual edge들도 경로의 일부로 선택할 수 있다.  
+때문에 그냥 시작부터 유량 그래프가 유량과 용량을 나타내는 간선들 뿐만 아니라 그 반대방향으로 0/0의 edges들도 가지고 있다고 생각하면 편하다.  
+
+### 알고리즘 흐름
+최대 유량을 구하는 방식 자체는 대부분의 알고리즘들이 유사하다.  
+1. Residual graph를 만든다. (즉 주어진 간선들의 역방향으로 0/0 간선들을 만든다)  
+2. Residual graph에서 Augmenting path들을 구한다. (즉 residual edge들을 포함해 구한다)  
+3. 구한 Augmenting path들의 bottleneck value들의 합이 곧 최대 유량이다.  
+
+이때 2번에서 Augmenting path를 구하는 방법에 따라 알고리즘이 나뉘고, 시간복잡도 또한 달라진다.  
+종료를 하나씩 살펴보자.  
+
+### a. 포드 풀커슨 알고리즘
+[참고영상](https://www.youtube.com/watch?v=LdOnanfc5TM&list=PLDV1Zeh2NRsDj3NzHbbFIC58etjZhiGcG)  
+최대 유량을 구하는 가장 단순한 형태의 알고리즘으로, augmenting path들을 구할 때 DFS를 사용한다.  
+
+### b. 에드몬트 카프 알고리즘
 
 ## 3-D. SCC 알고리즘
-### 타잔의 알고리즘
+### a. 타잔의 알고리즘
 [참고영상](https://www.youtube.com/watch?v=wUgWX0nc4NY)  
-### 코사라주 알고리즘
+### b. 코사라주 알고리즘
 [타잔&코사라주 참고글](https://jason9319.tistory.com/m/98)  
 
 # 4. LCS (Longest Common Subsequence)
