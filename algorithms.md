@@ -506,8 +506,9 @@ augmented path가 더 없으면 bottleneck value들을 더하고 종료한다.
 즉 상황에 따라 최적의 알고리즘이 얼마든지 달라질 수 있다.  
 
 ### 관련 문제
-1014: N이 작기 때문에 bitmasking + DP로도 해결 가능하다.  
-11014: 최대 유량을 사용해야 풀 수 있다. 이분 그래프에 대한 사전지식이 필요하다.  
+11014: 최대 유량 응용 문제로, 풀이 자체를 떠올리는 것을 포함해 전반적으로 상당히 어렵다. 이분 그래프에 대한 사전지식이 필요하다.  
+최대 유량 알고리즘을 활용해 Minimum Vertex Cut을 구하는 문제로, 자세한 설명은 아래 글을 참고하자.  
+https://blog.naver.com/PostView.nhn?isHttpsRedirect=true&blogId=kks227&logNo=220617896760  
 
 ## 3-D. SCC 알고리즘
 ### a. 타잔의 알고리즘
