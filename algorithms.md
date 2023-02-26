@@ -441,6 +441,19 @@ TODO
 ![image](https://user-images.githubusercontent.com/63915665/221359866-259614a5-8718-4bed-8725-6527a141b0cf.png)  
 기본적으로 유량 그래프는 위와 같은 형태의 방향 그래프로, 하나의 간선에는 최대한 통과시킬 수 있는 유량이 정해져 있다.  
 
+유량 그래프는 이하의 속성들을 따른다.  
+* 용량 제한 속성: f(u, v) <= c(u, v)  
+가장 자명한 속성으로, 각 간선의 유량은 해당 간선의 용량을 초과할 수 없다.  
+
+* 유량의 대칭성: f(u, v) = -f(v, u)  
+u에서 v로 유량이 흘러올 경우, v의 입장에서는 u로 음수의 유량을 보내는 것이라고 생각함  
+
+* 유량의 보존: ∑f(u,v) = 0  
+각 정점에 들어오는 유량과 나가는 유량의 양은 정확히 같아야 함을 나타낸다.  
+유량의 대칭성에 의해 정점에 들어오는 유량은 모두 음수로 표현되므로  
+한 정점에서 다른 모든 정점에 보내는 유량을 합하면 모두 0 이 되어야한다.  
+- 출처: https://nsgg.tistory.com/148  
+
 ### 용어  
 * Flow: 어떤 간선에 흐를 수 있는 최대유량(max flow) 또는 현재 흐르는 유량(current flow)  
 * Capacity: 남은 유량. 즉 max flow - current flow.  
@@ -480,6 +493,7 @@ Residual edge란 해당 augmenting path의 bottleneck value * (-1)을 current fl
 종료를 하나씩 살펴보자.  
 
 ### a. 포드 풀커슨 알고리즘(DFS)
+[참고글(권장)](https://nsgg.tistory.com/148?category=868633)  
 [참고영상](https://www.youtube.com/watch?v=LdOnanfc5TM&list=PLDV1Zeh2NRsDj3NzHbbFIC58etjZhiGcG)  
 정확히 따지면 위에서 언급한 알고리즘 흐름 자체를 포드 풀커슨 알고리즘이라고 하지만, 대부분 편의상 그냥 DFS를 이용해 augmenting path를 구하는 방식을 포드 풀커슨 알고리즘이라고 사용하는 듯 하다.  
 최대 유량을 구하는 알고리즘으로 augmenting path들을 구할 때 DFS를 사용한다.  
@@ -504,6 +518,15 @@ augmented path가 더 없으면 bottleneck value들을 더하고 종료한다.
 ![image](https://user-images.githubusercontent.com/63915665/221361460-ec3beec0-a072-4c2d-9f49-9e7b53f84f76.png)  
 보면 알 수 있듯이 어떤 한 알고리즘이 압도적으로 월등하다 라고 말하기 애매하다.  
 즉 상황에 따라 최적의 알고리즘이 얼마든지 달라질 수 있다.  
+
+### 응용 - 이분 매칭 알고리즘(Bipartite Matching)  
+선수지식: 이분 그래프, 최대 유량 알고리즘(그 중에서도 특히 DFS를 사용하는 포드 풀커슨 알고리즘)  
+https://yjg-lab.tistory.com/209  
+https://nsgg.tistory.com/153  
+
+이분 매칭은 최대 유량 문제로 해석될 수 있다.  
+![image](https://user-images.githubusercontent.com/63915665/221398566-997a959e-018a-4ca1-9206-8ce56c8bd7fd.png)  
+다만, 이를 구현할 때는 모든 일반적인 최대 유량상황에서 쓰이는 최대 유량 알고리즘으로 구현하기보다는, 이분 매칭에 특화된(=더 효율적인) 알고리즘으로 구현하는 게 일반적이다.  
 
 ### 관련 문제
 11014: 최대 유량 응용 문제로, 풀이 자체를 떠올리는 것을 포함해 전반적으로 상당히 어렵다. 이분 그래프에 대한 사전지식이 필요하다.  
