@@ -505,9 +505,6 @@ augmented path가 더 없으면 bottleneck value들을 더하고 종료한다.
 보면 알 수 있듯이 어떤 한 알고리즘이 압도적으로 월등하다 라고 말하기 애매하다.  
 즉 상황에 따라 최적의 알고리즘이 얼마든지 달라질 수 있다.  
 
-### 최대 유량 문제들  
-[백준 1014(리트코드 1349)](https://www.acmicpc.net/problem/1014)  
-
 ## 3-D. SCC 알고리즘
 ### a. 타잔의 알고리즘
 [참고영상](https://www.youtube.com/watch?v=wUgWX0nc4NY)  
