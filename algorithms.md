@@ -521,8 +521,7 @@ augmented path가 더 없으면 bottleneck value들을 더하고 종료한다.
 
 ### 응용 - 이분 매칭 알고리즘(Bipartite Matching)  
 선수지식: 이분 그래프, 최대 유량 알고리즘(그 중에서도 특히 DFS를 사용하는 포드 풀커슨 알고리즘)  
-https://yjg-lab.tistory.com/209  
-https://nsgg.tistory.com/153  
+https://blog.naver.com/kks227/220807541506  
 
 이분 매칭은 최대 유량 문제로 해석될 수 있다.  
 ![image](https://user-images.githubusercontent.com/63915665/221398566-997a959e-018a-4ca1-9206-8ce56c8bd7fd.png)  
