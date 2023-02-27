@@ -484,12 +484,11 @@ Residual edge란 해당 augmenting path의 bottleneck value * (-1)을 current fl
 
 ### 알고리즘 흐름
 최대 유량을 구하는 방식 자체는 대부분의 알고리즘들이 유사하다.  
-1. Residual graph를 만든다. (즉 주어진 간선들의 역방향으로 0/0 간선들을 만든다)  
-2. Residual graph에서 Augmenting path들을 구한다. (즉 residual edge들을 포함해 구한다)  
-3. 2번을 더 이상 augmenting path를 찾을 수 없을 때까지 반복한다.  
-4. 구한 Augmenting path들의 bottleneck value들의 합이 곧 최대 유량이다.  
+Augmenting path들을 구한다. (즉 residual edge들을 포함해 구한다)  
+Augmenting path를 찾을 수 없을 때까지 반복한다.  
+구한 Augmenting path들의 bottleneck value들의 합이 곧 최대 유량이다.  
 
-이때 2번에서 Augmenting path를 구하는 방법에 따라 알고리즘이 나뉘고, 시간복잡도 또한 달라진다.  
+이때 Augmenting path를 구하는 방법에 따라 알고리즘이 나뉘고, 시간복잡도 또한 달라진다.  
 종료를 하나씩 살펴보자.  
 
 ### a. 포드 풀커슨 알고리즘(DFS)
