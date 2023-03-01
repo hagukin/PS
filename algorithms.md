@@ -537,12 +537,7 @@ https://blog.naver.com/PostView.nhn?isHttpsRedirect=true&blogId=kks227&logNo=220
 ### b. 코사라주 알고리즘
 [타잔&코사라주 참고글](https://jason9319.tistory.com/m/98)  
 
-# 4. LCS (Longest Common Subsequence)
-DP로 구현한다.  
-시간복잡도: O(MN) 배열길이 각각 M,N  
-[참고글](https://velog.io/@emplam27/알고리즘-그림으로-알아보는-LCS-알고리즘-Longest-Common-Substring와-Longest-Common-Subsequence)
-
-# 5. Brute Force
+# 4. Brute Force
 ## 5-A. 중간에서 만나기 (MITM, Meet in the middle) 알고리즘
 갯수 N인 수열의 부분수열(가능한 모든 조합)을 구하려고 할 때 만약 N이 너무 커서 조합의 갯수가 2^40 이런 식으로 지나치게 커져버리면 단순 DFS로는 시간 내에 풀기 어려워진다. 이때 사용할 수 있는 방법이 중간에서 만나기 알고리즘으로, 일단 부분수열을 절반으로 쪼갠다. 쪼개는 지점은 정확히 절반에 가까울 수록 좋다. (이유는 읽다보면 이해된다)  
 쪼개고 나면 쪼개진 수열들의 크기가 두배로 줄었기 때문에 부분수열을 구할 수 있다. (물론 애초에 N이 아주 큰 경우에는 이래도 불가능할 지도 모르긴 한다. 가능한 경우에 한해 MITM을 사용한다.)  
@@ -556,7 +551,7 @@ DP로 구현한다.
 
 참고글: https://jjudrgn.tistory.com/54  
 
-# 6. 트리
+# 5. 트리
 ## 6-A. 트리 자료구조들
 ### 세그먼트 트리(Segment tree)  
 TODO  
@@ -592,11 +587,25 @@ array의 모든 정점들을 펜윅트리의 각 인덱스에 mapping 해둔 채
 사실 O(N) 생성법만 알아도 될 듯 하다.  
 
 
-# 7. 문자열
+# 6. 문자열
 TODO: Suffix array https://www.youtube.com/watch?v=zqKlL3ZpTqs related videos 참고  
 TODO: kmp  
 
-# 8. 기타
+## 6-A. LCS들 (Longest Common Subsequence & Longest Common Substring)
+LC subsequence와 LC substring은 구하는 게 다르다! 주의하자.  
+[두 개 모두 다루는 참고글](https://velog.io/@emplam27/알고리즘-그림으로-알아보는-LCS-알고리즘-Longest-Common-Substring와-Longest-Common-Subsequence)  
+
+#### Longest Common Substring
+O(N * M) 소요, 원리는 아주 단순함.  
+냅색스러운 느낌의 dp로 해결하면 됨.  
+
+#### Longest Common Subsequence
+O(N * M) 소요, 거의 비슷한 형태이나 약간의 생각이 필요함.  
+Longest Common Subsequence는 항상 두 문자열의 처음으로(=최소 인덱스에서) 같은 문자부터 시작됨을 인지하고 있어야 이해가 편함. (GODOT과 ORANGE라면 처음으로 같은 문자가 O)  
+이때 그 같은 문자의 인덱스가 각각 i, j라고 하면 그 다음 subsequence에 추가될 문자는 i, j보다 인덱스가 커야 한다는 것을 이용한 bottom-up dp임.  
+
+
+# 7. 기타
 ## 8-A. 2차원 누적합(2D Prefix sum table)
 [참고글](https://en.wikipedia.org/wiki/Summed-area_table)  
 [참고영상](https://www.youtube.com/watch?v=KT864Aa3zE0&list=PL-OC--HdIAXMXZ3IXSeLaO9Rl6qJNGc6g&index=30)  
