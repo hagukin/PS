@@ -555,3 +555,17 @@ DP로 구현한다.
 그 후 정렬시키지 않은 벡터의 각 요소에 대해 for loop을 돌면서 정렬한 벡터에서 합이 S가 되는 요소의 위치를 이분탐색으로 찾는다. 이때 같은 값의 요소가 여러 개 있을 수도 있기 때문에 lower_bound와 upper_bound를 모두 이용해 같은 값 요소의 갯수를 구하고 이를 결과값에 더해주면 답을 구할 수 있다. (그밖에 세부적으로 고려해야 될 사항들이 있지만 생략, PS레포 참조)  
 
 참고글: https://jjudrgn.tistory.com/54  
+
+# 6. 트리
+## 6-A. 트리 자료구조들
+### 펜윅 트리(Fenwick tree)
+[참고영상](https://www.youtube.com/watch?v=RgITNht_f4Q)
+세그먼트 트리보다 훨씬 구현하기 쉽고 메모리를 적게 차지한다.  
+![image](https://user-images.githubusercontent.com/63915665/222091535-9168a1c2-61a5-4af2-8bd3-1aaeec76ef1c.png)  
+
+
+
+
+
+
+
