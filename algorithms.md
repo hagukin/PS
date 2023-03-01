@@ -558,10 +558,44 @@ DP로 구현한다.
 
 # 6. 트리
 ## 6-A. 트리 자료구조들
-### 펜윅 트리(Fenwick tree)
-[참고영상](https://www.youtube.com/watch?v=RgITNht_f4Q)
+### 세그먼트 트리(Segment tree)  
+TODO  
+
+### 펜윅 트리(Fenwick tree) / Binary Indexed Tree(BIT)
+[참고영상 - 개요](https://www.youtube.com/watch?v=RgITNht_f4Q)  
+
 세그먼트 트리보다 훨씬 구현하기 쉽고 메모리를 적게 차지한다.  
 ![image](https://user-images.githubusercontent.com/63915665/222091535-9168a1c2-61a5-4af2-8bd3-1aaeec76ef1c.png)  
+심지어 (위 사진에는 O(N logN)으로 나와있긴 하지만) Construction time도 O(N)으로 세그먼트 트리와 동일하다!  
+이쯤되면 거의 완벽한 자료구조처럼 보이지만, 아쉽게도 세그먼트 트리보다 덜 범용적이다.   
+구간에 대한 연산결과(x~y까지의 합)는 펜윅트리도 똑같이 빠르게 구할 수 있지만, 구간에 대한 특정 조건을 만족하는 값 추출과 같은 꼴의 경우 펜윅 트리가 더 불리하다.
+예시로 "구간 a~b 중에서의 최대 또는 최소값 찾기" 가 있다.  
+참고: https://yabmoons.tistory.com/438  
+
+#### 펜윅 트리 정점 변경
+[참고영상 - 정점 변경](https://www.youtube.com/watch?v=B-BkW9ZpKKM&t=0s)  
+
+#### 펜윅 트리 생성
+펜윅 트리에서의 정점 변경에 대한 선수지식이 권장된다.  
+
+위에서 언급했듯이 펜윅 트리에서는 O(N logN)에도 생성이 가능하지만, 누적합을 이용해 더 빠른 O(N)에 생성이 가능하다.  
+1) O(N logN) 방법  
+array의 모든 정점에 대해 iterate하면서 각 정점이 포함되는 부모들(max 10000b인 경우 0001b번 인덱스는 0001b, 0010b, 0100b, 1000b에 연산해주어야 한다)에 연산을 해준다.  
+-> 하나의 정점이 가질 수 있는 부모는 최대 logN개이므로 시간복잡도 O(N logN)이 된다.  
+2) O(N) 방법  
+[참고영상 - 트리 생성](https://www.youtube.com/watch?v=BHPez138yX8)  
+![image](https://user-images.githubusercontent.com/63915665/222110557-0a508e3e-084d-4e1b-b114-e963bf4fdf86.png)  
+array의 모든 정점들을 펜윅트리의 각 인덱스에 mapping 해둔 채로 시작한다. 즉 A\[1\]은 fenwick의 0001b에 저장되어있다.  
+이 상태에서 마찬가지 모든 정점에 대해서 iterate하는데, 이때 현재 정점의 바로 한 칸 위의 부모(0010b의 경우 0100b)에게만 A\[0010b\]만큼을 더해준다.  
+이 과정을 반복하면 결국 N * 1번만 연산하면 되기 때문에 시간복잡도 O(N)이 된다.  
+
+사실 O(N) 생성법만 알아도 될 듯 하다.  
+
+
+
+
+
+
 
 
 
