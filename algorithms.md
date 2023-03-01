@@ -592,7 +592,20 @@ array의 모든 정점들을 펜윅트리의 각 인덱스에 mapping 해둔 채
 사실 O(N) 생성법만 알아도 될 듯 하다.  
 
 
+# 7. 문자열
+TODO: Suffix array https://www.youtube.com/watch?v=zqKlL3ZpTqs related videos 참고  
 
+# 8. 기타
+## 8-A. 2차원 누적합(2D Prefix sum table)
+[참고글](https://en.wikipedia.org/wiki/Summed-area_table)  
+[참고영상](https://www.youtube.com/watch?v=KT864Aa3zE0&list=PL-OC--HdIAXMXZ3IXSeLaO9Rl6qJNGc6g&index=30)  
+
+이미지 처리에도 자주 사용된다.  
+
+### 개요  
+![image](https://user-images.githubusercontent.com/63915665/222114139-1cb5cd2e-9624-4040-9ae4-9e6a3c89c242.png)  
+![image](https://user-images.githubusercontent.com/63915665/222114211-6d1dcbb8-e89c-4358-9911-618f8c3fa0e2.png)  
+부분의 영역을 구하는 방법은 array에서의 누적합에서 특정 인덱스의 값을 구하는 방법과 아주 유사하다.  
 
 
 
