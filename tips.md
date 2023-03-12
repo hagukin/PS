@@ -78,4 +78,6 @@ https://modoocode.com/298
 char c = '5';
 int ci = c - '0';
 ```
+* std::gcd(a, b)  
+#include <numeric>에 정의  
 [그 외 참고하면 좋은 팁들](https://kswims.tistory.com/137)
