@@ -537,6 +537,12 @@ https://blog.naver.com/PostView.nhn?isHttpsRedirect=true&blogId=kks227&logNo=220
 ### b. 코사라주 알고리즘
 [타잔&코사라주 참고글](https://jason9319.tistory.com/m/98)  
 
+## 3-E. 위상정렬
+[참고글](https://yoongrammer.tistory.com/86)  
+### DFS 구현
+### BFS 구현
+### 우선순위큐 구현
+
 # 4. Brute Force
 ## 5-A. 중간에서 만나기 (MITM, Meet in the middle) 알고리즘
 갯수 N인 수열의 부분수열(가능한 모든 조합)을 구하려고 할 때 만약 N이 너무 커서 조합의 갯수가 2^40 이런 식으로 지나치게 커져버리면 단순 DFS로는 시간 내에 풀기 어려워진다. 이때 사용할 수 있는 방법이 중간에서 만나기 알고리즘으로, 일단 부분수열을 절반으로 쪼갠다. 쪼개는 지점은 정확히 절반에 가까울 수록 좋다. (이유는 읽다보면 이해된다)  
