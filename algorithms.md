@@ -538,10 +538,15 @@ https://blog.naver.com/PostView.nhn?isHttpsRedirect=true&blogId=kks227&logNo=220
 [타잔&코사라주 참고글](https://jason9319.tistory.com/m/98)  
 
 ## 3-E. 위상정렬
-[참고글](https://yoongrammer.tistory.com/86)  
 ### DFS 구현
+[참고글](https://yoongrammer.tistory.com/86)  
 ### BFS 구현
-### 우선순위큐 구현
+[참고글](https://yoongrammer.tistory.com/86)  
+#### priority_queue로 우선순위 조건 부여 (위상정렬 가능한 리스트들 중 가장 앞서는 리스트 찾기)
+사실 더 설명이 필요 없을 정도다. 말 그대로 큐 대신 우선순위큐를 사용하면 큐의 모든 원소들이 정렬된 상태를 유지하기 때문에 (정확히는 front값을 최소로 유지하기 때문에) 위상순위 결과로 나올 수 있는 여러가지 중 가장 앞서는 결과를 쉽게 얻을 수 있다.  
+시간복잡도의 경우 O(V + ElogE) 정도로 추정된다.  
+관련문제: 백준 1766  
+해당 문제는 DFS로 풀이가 불가능해보인다. 로직상 구현은 가능하나, 시간초과가 발생한다.  
 
 # 4. Brute Force
 ## 5-A. 중간에서 만나기 (MITM, Meet in the middle) 알고리즘
