@@ -3,11 +3,6 @@
 #include <memory.h>
 #include <iostream>
 
-/*
-의도된 접근법인지는 모르겠으나 그리디로 풀이함, 문제가 상당히 재미있었음
-약 1시간 20분 소요
-*/
-
 using namespace std;
 
 string solution(int n, int m, int x, int y, int r, int c, int k) {
