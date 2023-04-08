@@ -1,3 +1,5 @@
+// 풀고 나서 정답을 확인하니 카카오측에서 의도한 풀이와 거의 정확하게 동일하게 풀었다!
+
 #include <string>
 #include <vector>
 #include <iostream>
