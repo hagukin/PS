@@ -123,7 +123,7 @@ vector<int> getAns(int totalCnt, vector<int>& target)
 
 vector<int> solution(vector<vector<int>> edges, vector<int> target) {
     // INIT
-    MAX_DROP_CNT = 11000;
+    MAX_DROP_CNT = 11000; // worst case를 위한 값: 101개의 노드가 전부 100이 목표값일 때 이걸 전부 1로 채워야 할 경우 대략 10100번의 drop을 시행해줘야한다
     NODE_CNT = edges.size() + 1;
     for (vector<int>& e : edges)
     {
