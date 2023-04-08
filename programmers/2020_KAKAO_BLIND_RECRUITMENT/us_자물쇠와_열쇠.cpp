@@ -18,11 +18,6 @@ void turnCCW(const vector<vector<int>>& origin, vector<vector<int>>& ret)
 }
 
 bool solution(vector<vector<int>> key, vector<vector<int>> lock) {
-    /*
-    BF:
-    40*40(격자) * 4(회전)* 20*20(확인시간) = 2560000
-    -> 가능
-    */
     int M = key.size();
     int N = lock.size();
     
@@ -34,13 +29,11 @@ bool solution(vector<vector<int>> key, vector<vector<int>> lock) {
     turnCCW(k2, k3);
     turnCCW(k3, k4);
     
-    vector<vector<vector<int>>&> v;
+    vector<vector<vector<int>>> v;
     v.push_back(key);
     v.push_back(k2);
     v.push_back(k3);
     v.push_back(k4);
-    
-    // 다풀음 TODO여기 마무리
     
      // 홈 갯수
     int lockBlankCnt = 0;
@@ -49,25 +42,30 @@ bool solution(vector<vector<int>> key, vector<vector<int>> lock) {
             if (lock[i][j] == 0) lockBlankCnt++;
     
     // solve
-    for (int i=-M+1;i<N;++i)
+    for (vector<vector<int>>& cKey : v)
     {
-        for (int j=-M+1;j<N;++j)
+        for (int i=-M+1;i<N;++i)
         {
-            // scan
-            int filled = 0;
-            for (int sy=0;sy<N;++sy)
+            for (int j=-M+1;j<N;++j)
             {
-                for (int sx=0;sx<N;++sx)
+                // scan
+                int filled = 0;
+                bool collision = false;
+                for (int sy=0;sy<N;++sy)
                 {
-                    int ky = -i+sy;
-                    int kx = -j+sx;
-                    if (ky >= 0 && kx >= 0 && ky < M && kx < M && lock[sy][sx] == 0 && key[ky][kx] == 1) filled++;
-                    
-                    // DEBUG
-                    if (sy == 0 && sx == 0) cout << "0,0 : " << ky << kx << endl;
+                    for (int sx=0;sx<N;++sx)
+                    {
+                        int ky = -i+sy;
+                        int kx = -j+sx;
+                        if (ky >= 0 && kx >= 0 && ky < M && kx < M)
+                        {
+                            if (lock[sy][sx] == 0 && cKey[ky][kx] == 1) filled++;
+                            if (lock[sy][sx] == 1 && cKey[ky][kx] == 1) collision = true;
+                        }
+                    }
                 }
+                if (filled == lockBlankCnt && !collision) return true;
             }
-            if (filled == lockBlankCnt) return true;
         }
     }
     return false;
