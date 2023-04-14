@@ -655,6 +655,12 @@ int Sum(int Node, int Start, int End, int Left, int Right)
 }
 ```
 
+#### 기타 구현시 주의할 부분들  
+[boj 11505 풀이 참고글](https://imnotabear.tistory.com/492)  
+위 코드에서 구현시의 테크닉을 살펴볼 수 있다.  
+또 구간곱을 구하는 경우 구간합을 구하는 경우와는 약간 다른 부분이 있는데, 때문에 백준 11505를 꼭 풀어보는 것을 권장한다.  
+
+
 ### 펜윅 트리(Fenwick tree) / Binary Indexed Tree(BIT)
 [참고영상 - 개요](https://www.youtube.com/watch?v=RgITNht_f4Q)  
 
