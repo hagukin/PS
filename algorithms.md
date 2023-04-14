@@ -636,6 +636,24 @@ ceil(4.xxx)는 5이므로, 최종적으로 32가 나오는 것을 알 수 있다
 예를 들어 내가 2~3의 합을 구하려 하는데, 노드가 1~2와 3~4로 나눠진다면,  
 1~2에서 2~2를 구하고, 3~4에서 3~3을 구한 후, 이걸 합쳐 다시 콜스택을 타고 반환시켜주면 된다.  
 
+이걸 구현할 때 조금 헷갈릴 수 있는데, 경우를 3가지로 나눠서 구현해야 한다.  
+이걸 3개 이상으로 더 쪼갤 필요 없다는 점을 기억해두자.  
+```c++
+// 1. 현재 우리가 탐색하는 범위가, 우리가 찾고자 하는 구간과 완전히 겹쳐지지 않는 경우.
+// 2. 현재 우리가 탐색하는 범위가, 우리가 찾고자 하는 구간에 완전히 속해있는 경우.
+// 3. 1, 2번 경우를 제외한 나머지 경우. 즉, 일부만 걸쳐있는 경우.
+
+int Sum(int Node, int Start, int End, int Left, int Right)
+{
+    if (Left > End || Right < Start) return 0;
+    if (Left <= Start && End <= Right) return SegmentTree[Node];
+ 
+    int Mid = (Start + End) / 2;
+    int Left_Result = Sum(Node * 2, Start, Mid, Left, Right);
+    int Right_Result = Sum(Node * 2 + 1, Mid + 1, End, Left, Right);
+    return Left_Result + Right_Result;
+}
+```
 
 ### 펜윅 트리(Fenwick tree) / Binary Indexed Tree(BIT)
 [참고영상 - 개요](https://www.youtube.com/watch?v=RgITNht_f4Q)  
