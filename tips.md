@@ -1,3 +1,23 @@
+* priority_queue
+```c++
+// 1. cmp 사용 시 (맘 편하게 그냥 항상 cmp를 구현해줘도 상관없다)
+struct a{
+    int start;
+    int end;
+    int value;
+};
+ 
+struct cmp{
+    bool operator()(a t, a u){
+        return t.value < u.value;
+    }
+};
+priority_queue<a,vector<a>,cmp> pq;
+
+// 2. greater 사용시 (int같은 기본 자료형의 오름차 정렬일 경우 cmp구현이 필요없다)
+// priority_queue<int,vector<int>,less<int> > pq; -> 기본값
+priority_queue<int,vector<int>,greater<int> > pq;
+```
 * lambda sort
 ```c++
 std::sort(s.begin(), s.end(), [](int a, int b) {
