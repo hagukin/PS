@@ -150,20 +150,40 @@ void initPQ()
     }
 }
 
-void ufUnion()
+int ufGetRoot(int n)
 {
-    
+    if (uf[n] == n) return n;
+    return uf[n] = ufGetRoot(uf[n]);
 }
 
-void ufFind()
+void ufUnion(int a, int b)
 {
-    
+    int bigger, smaller;
+    if (ufGetRoot(a) > ufGetRoot(b))
+    {
+        bigger = ufGetRoot(a);
+        smaller = ufGetRoot(b);
+    }
+    else
+    {
+        bigger = ufGetRoot(b);
+        smaller = ufGetRoot(a);
+    }
+    uf[bigger] = smaller; // 더 작은 수 우선시
+    return;
 }
 
 void findMST()
 {
-    int n = maxGroupId;
-    
+    while(!pq.empty())
+    {
+        PP c = pq.top();
+        pq.pop();
+        if (ufGetRoot(c.second.first) == ufGetRoot(c.second.second)) continue;// 사이클 생성
+        ufUnion(c.second.first, c.second.second);
+        answer += c.first;
+    }
+    return;
 }
 
 int solution(vector<vector<int>> land, int height) {
