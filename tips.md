@@ -101,3 +101,10 @@ int ci = c - '0';
 * std::gcd(a, b)  
 #include \<numeric\>에 정의  
 [그 외 참고하면 좋은 팁들](https://kswims.tistory.com/137)
+
+* 조합의 경우(nCk) 재귀함수로 구현하는 게 통상적이나 k=3개정도까지는 N의 크기에 따라 그냥 for 중첩을 사용하는 것을 고려해보자.  
+```c++
+for i < N
+  for j < i
+    for k < j
+```
