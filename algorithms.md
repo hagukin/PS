@@ -535,6 +535,10 @@ https://blog.naver.com/kks227/220807541506
 최대 유량 알고리즘을 활용해 Minimum Vertex Cut을 구하는 문제로, 자세한 설명은 아래 글을 참고하자.  
 https://blog.naver.com/PostView.nhn?isHttpsRedirect=true&blogId=kks227&logNo=220617896760  
 
+### 참고
+PS에서는 거의 안쓰일 것 같지만 게임 개발과 밀접한 관련이 있는 hierarchical pathfinding에 대해 알아두자.  
+https://gamedev.stackexchange.com/questions/192183/how-does-hpahierarchical-pathfinding-a-really-work  
+
 ## 3-D. SCC 알고리즘
 ### a. 타잔의 알고리즘
 [참고영상](https://www.youtube.com/watch?v=wUgWX0nc4NY)  
